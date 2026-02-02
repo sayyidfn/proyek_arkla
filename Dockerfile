@@ -3,7 +3,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Install dependencies
-COPY requirements.txt .
+COPY arkla-backend/requirements.txt .
 
 # Uninstall opencv-python jika ada, install headless version
 RUN pip install --no-cache-dir --upgrade pip && \
@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
 # Copy app
-COPY . .
+COPY arkla-backend/app ./app
 
 # Create directories
 RUN mkdir -p uploads database output
