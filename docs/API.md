@@ -1,6 +1,7 @@
 # API Endpoints Documentation
 
 ## Base URL
+
 - Local: `http://localhost:8000/api/v1`
 - Production: `https://your-koyeb-url.koyeb.app/api/v1`
 
@@ -9,9 +10,11 @@
 ## 📄 Process Surat
 
 ### POST `/process-surat`
+
 Upload and process a document using OCR and AI extraction.
 
 **Request:**
+
 - Content-Type: `multipart/form-data`
 - Body:
   - `file` (required): Document file (PDF, JPG, PNG)
@@ -19,6 +22,7 @@ Upload and process a document using OCR and AI extraction.
   - `use_optimized` (optional): Boolean, default `true`
 
 **Response (Success):**
+
 ```json
 {
   "status": "success",
@@ -35,9 +39,9 @@ Upload and process a document using OCR and AI extraction.
     "requires_manual_review": false,
     "fields": {
       "nomor_surat": 0.95,
-      "tgl_surat": 0.90,
+      "tgl_surat": 0.9,
       "asal_surat": 0.85,
-      "isi_ringkas": 0.80
+      "isi_ringkas": 0.8
     }
   },
   "gemini_usage": {
@@ -50,6 +54,7 @@ Upload and process a document using OCR and AI extraction.
 ```
 
 **Error Codes:**
+
 - `INVALID_CATEGORY`: Invalid category provided
 - `INVALID_FILE`: Unsupported file format
 - `FILE_TOO_LARGE`: File exceeds 50MB limit
@@ -62,9 +67,11 @@ Upload and process a document using OCR and AI extraction.
 ## ✅ Verify Surat
 
 ### POST `/verify`
+
 Verify and save extracted data after user review.
 
 **Request:**
+
 ```json
 {
   "surat_id": "abc123-def456-ghi789",
@@ -79,6 +86,7 @@ Verify and save extracted data after user review.
 ```
 
 **Response:**
+
 ```json
 {
   "surat_id": "abc123-def456-ghi789",
@@ -92,9 +100,11 @@ Verify and save extracted data after user review.
 ## 📋 List Surat
 
 ### GET `/surat`
+
 Get list of all surat with pagination and filters.
 
 **Query Parameters:**
+
 - `kategori` (optional): Filter by category
 - `date_from` (optional): Start date (YYYY-MM-DD)
 - `date_to` (optional): End date (YYYY-MM-DD)
@@ -105,6 +115,7 @@ Get list of all surat with pagination and filters.
 - `limit` (optional): Items per page (default: 20, max: 100)
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -136,9 +147,11 @@ Get list of all surat with pagination and filters.
 ## 📝 Get Surat Detail
 
 ### GET `/surat/{surat_id}`
+
 Get detailed information about a specific surat.
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -167,9 +180,11 @@ Get detailed information about a specific surat.
 ## 🗑️ Delete Surat
 
 ### DELETE `/surat/{surat_id}`
+
 Delete a surat and all related data.
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -182,9 +197,11 @@ Delete a surat and all related data.
 ## 📊 Export
 
 ### POST `/export`
+
 Export surat data to Excel or CSV.
 
 **Query Parameters:**
+
 - `kategori` (required): Category to export
 - `date_from` (optional): Start date
 - `date_to` (optional): End date
@@ -192,6 +209,7 @@ Export surat data to Excel or CSV.
 - `format` (optional): `xlsx` or `csv` (default: xlsx)
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -206,9 +224,11 @@ Export surat data to Excel or CSV.
 ## ❤️ Health Check
 
 ### GET `/health`
+
 Check API health status.
 
 **Response:**
+
 ```json
 {
   "status": "healthy",
@@ -242,27 +262,32 @@ All error responses follow this format:
 ## 📊 Field Schemas by Category
 
 ### masuk_biasa
+
 - nomor_urut, index_surat, kode, tgl_surat, isi_ringkas
 - asal_surat, nomor_surat, lampiran, pengolah
 - tgl_diteruskan, disposisi_ketua, tgl_masuk, tujuan
 - tgl_surat_turun, disposisi_sekwan
 
 ### undangan
+
 - nomor_urut, index_surat, kode, tgl_surat_masuk, tgl_penyelesaian
 - isi_ringkas, asal_surat, nomor_surat, lampiran, keterangan
 - tgl_masuk_surat, diperuntukan, tgl_surat_turun, disposisi_sekwan
 
 ### masuk_penting
+
 - nomor_urut, index_surat, kode, tgl_surat_masuk, isi_ringkas
 - asal_surat, nomor_surat, lampiran, pengolah, tgl_diteruskan
 - disposisi_ketua, tgl_masuk, tujuan, tgl_surat_turun, disposisi_sekwan
 
 ### keluar / keluar_sekwan
+
 - nomor_urut, index_surat, kode, isi_ringkas
 - kepada, pengolah, tgl_surat, lampiran, catatan
 
 ### rahasia
+
 - nomor_urut, index_surat, kode, tgl_terima_surat, isi_ringkas
 - asal_surat, nomor_surat, lampiran, pengolah
 - tgl_diteruskan, catatan
-- *Note: All actions are logged in audit_log table*
+- _Note: All actions are logged in audit_log table_

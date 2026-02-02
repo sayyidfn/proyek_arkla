@@ -3,6 +3,7 @@
 ## 🚀 Overview
 
 ARKLA terdiri dari 2 komponen:
+
 1. **Backend** (FastAPI) - Deploy ke Koyeb
 2. **Frontend** (Next.js) - Deploy ke Vercel
 
@@ -59,10 +60,10 @@ arkla-backend/
 
 Tambahkan environment variable:
 
-| Name | Value |
-|------|-------|
+| Name             | Value               |
+| ---------------- | ------------------- |
 | `GOOGLE_API_KEY` | Your Gemini API key |
-| `ENVIRONMENT` | `production` |
+| `ENVIRONMENT`    | `production`        |
 
 ### Step 7: Deploy
 
@@ -77,8 +78,9 @@ curl https://your-service.koyeb.app/health
 ```
 
 Response:
+
 ```json
-{"status":"healthy","gemini_configured":true,"database":"connected"}
+{ "status": "healthy", "gemini_configured": true, "database": "connected" }
 ```
 
 ---
@@ -102,8 +104,8 @@ Response:
 
 Tambahkan:
 
-| Name | Value |
-|------|-------|
+| Name                  | Value                              |
+| --------------------- | ---------------------------------- |
 | `NEXT_PUBLIC_API_URL` | `https://your-koyeb-url.koyeb.app` |
 
 ⚠️ **Penting**: Jangan tambahkan `/api/v1` - frontend akan otomatis menambahkannya.
@@ -119,6 +121,7 @@ Tambahkan:
 ## 🔄 Auto-Deploy
 
 Setelah setup selesai, setiap push ke `main` branch akan trigger:
+
 - **Koyeb**: Auto-rebuild backend
 - **Vercel**: Auto-rebuild frontend
 
@@ -127,20 +130,25 @@ Setelah setup selesai, setiap push ke `main` branch akan trigger:
 ## 🔧 Troubleshooting
 
 ### Backend: "libxcb.so.1 not found"
+
 **Penyebab**: opencv-python membutuhkan GUI libraries
 **Solusi**: Pastikan `opencv-python-headless` di requirements.txt, bukan `opencv-python`
 
 ### Backend: "Package not found"
+
 **Penyebab**: Debian package name berubah
 **Solusi**: Gunakan `libgl1` bukan `libgl1-mesa-glx` di Dockerfile
 
 ### Frontend: "API Error 404"
+
 **Penyebab**: URL backend salah atau tidak ada `/api/v1`
-**Solusi**: 
+**Solusi**:
+
 1. Pastikan `NEXT_PUBLIC_API_URL` benar
 2. Redeploy frontend setelah update env variable
 
 ### Frontend: URL terlihat salah (gabungan Vercel + Koyeb)
+
 **Penyebab**: `NEXT_PUBLIC_API_URL` tidak ada `https://`
 **Solusi**: Tambahkan `https://` di depan URL
 
@@ -149,11 +157,13 @@ Setelah setup selesai, setiap push ke `main` branch akan trigger:
 ## 📊 Monitoring
 
 ### Koyeb Dashboard
+
 - View logs: Service → Logs
 - View metrics: Service → Metrics
 - Restart: Service → Redeploy
 
 ### Vercel Dashboard
+
 - View logs: Deployments → Functions
 - View analytics: Analytics tab
 - Redeploy: Deployments → ... → Redeploy
@@ -163,10 +173,10 @@ Setelah setup selesai, setiap push ke `main` branch akan trigger:
 ## 💰 Cost Estimate
 
 | Service | Free Tier Limit | Expected Usage |
-|---------|-----------------|----------------|
-| Koyeb | 1 nano instance | ✅ Sufficient |
-| Vercel | 100GB bandwidth | ✅ Sufficient |
-| Gemini | 15 RPM, $0 | ✅ Free tier |
+| ------- | --------------- | -------------- |
+| Koyeb   | 1 nano instance | ✅ Sufficient  |
+| Vercel  | 100GB bandwidth | ✅ Sufficient  |
+| Gemini  | 15 RPM, $0      | ✅ Free tier   |
 
 ---
 
@@ -182,6 +192,7 @@ Setelah setup selesai, setiap push ke `main` branch akan trigger:
 ## 📞 Support
 
 Jika mengalami masalah:
+
 1. Check logs di Koyeb/Vercel dashboard
 2. Verify environment variables
 3. Test health endpoint: `GET /health`

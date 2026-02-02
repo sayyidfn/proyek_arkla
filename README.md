@@ -21,18 +21,21 @@ Sistem manajemen arsip digital untuk DPRD Kabupaten Sleman dengan fitur OCR dan 
 ## 🛠️ Tech Stack
 
 ### Backend
+
 - **Framework**: FastAPI (Python 3.12)
 - **Database**: SQLite
 - **AI/ML**: Google Gemini API (gemini-2-flash)
 - **Image Processing**: OpenCV (headless), Pillow
 
 ### Frontend
+
 - **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **State**: React Hooks
 
 ### Deployment
+
 - **Backend**: Koyeb (Docker)
 - **Frontend**: Vercel
 - **Repository**: GitHub
@@ -66,17 +69,20 @@ proyek_arkla/
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Python 3.12+
 - Node.js 18+
 - Google Gemini API Key
 
 ### 1. Clone Repository
+
 ```bash
 git clone https://github.com/sayyidfn/proyek_arkla.git
 cd proyek_arkla
 ```
 
 ### 2. Setup Backend
+
 ```bash
 cd arkla-backend
 
@@ -100,6 +106,7 @@ python run.py
 Backend akan berjalan di `http://localhost:8000`
 
 ### 3. Setup Frontend
+
 ```bash
 cd arkla-frontend
 
@@ -118,6 +125,7 @@ Frontend akan berjalan di `http://localhost:3000`
 ## ⚙️ Environment Variables
 
 ### Backend (.env)
+
 ```env
 # Required
 GOOGLE_API_KEY=your_gemini_api_key_here
@@ -128,6 +136,7 @@ DATABASE_PATH=database/arkla.db
 ```
 
 ### Frontend (.env.local)
+
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
@@ -135,22 +144,24 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 ## 📚 API Documentation
 
 API documentation tersedia di:
+
 - **Swagger UI**: `http://localhost:8000/docs`
 - **ReDoc**: `http://localhost:8000/redoc`
 
 ### Main Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/v1/process-surat` | Upload & process document |
-| `POST` | `/api/v1/verify` | Verify & save extracted data |
-| `GET` | `/api/v1/surat` | List all surat with filters |
-| `GET` | `/api/v1/surat/{id}` | Get surat detail |
-| `DELETE` | `/api/v1/surat/{id}` | Delete surat |
-| `POST` | `/api/v1/export` | Export to Excel/CSV |
-| `GET` | `/health` | Health check |
+| Method   | Endpoint                | Description                  |
+| -------- | ----------------------- | ---------------------------- |
+| `POST`   | `/api/v1/process-surat` | Upload & process document    |
+| `POST`   | `/api/v1/verify`        | Verify & save extracted data |
+| `GET`    | `/api/v1/surat`         | List all surat with filters  |
+| `GET`    | `/api/v1/surat/{id}`    | Get surat detail             |
+| `DELETE` | `/api/v1/surat/{id}`    | Delete surat                 |
+| `POST`   | `/api/v1/export`        | Export to Excel/CSV          |
+| `GET`    | `/health`               | Health check                 |
 
 ### Process Surat Request
+
 ```bash
 curl -X POST "http://localhost:8000/api/v1/process-surat" \
   -F "file=@document.jpg" \
@@ -159,6 +170,7 @@ curl -X POST "http://localhost:8000/api/v1/process-surat" \
 ```
 
 ### Response Example
+
 ```json
 {
   "status": "success",
@@ -173,7 +185,7 @@ curl -X POST "http://localhost:8000/api/v1/process-surat" \
     "overall": 0.85,
     "fields": {
       "nomor_surat": 0.95,
-      "tgl_surat": 0.90
+      "tgl_surat": 0.9
     }
   }
 }
@@ -182,11 +194,13 @@ curl -X POST "http://localhost:8000/api/v1/process-surat" \
 ## 🐳 Docker Deployment
 
 ### Build Image
+
 ```bash
 docker build -t arkla-backend .
 ```
 
 ### Run Container
+
 ```bash
 docker run -d \
   -p 8000:8000 \
@@ -198,6 +212,7 @@ docker run -d \
 ## ☁️ Cloud Deployment
 
 ### Backend (Koyeb)
+
 1. Fork/push repository ke GitHub
 2. Buat project di [Koyeb](https://koyeb.com)
 3. Connect GitHub repository
@@ -205,6 +220,7 @@ docker run -d \
 5. Deploy!
 
 ### Frontend (Vercel)
+
 1. Import project dari GitHub di [Vercel](https://vercel.com)
 2. Set `Root Directory` ke `arkla-frontend`
 3. Add environment variable: `NEXT_PUBLIC_API_URL` = URL backend Koyeb
@@ -212,14 +228,14 @@ docker run -d \
 
 ## 📊 Kategori Surat
 
-| Kategori | Deskripsi | Fields Utama |
-|----------|-----------|--------------|
-| `masuk_biasa` | Surat masuk biasa | nomor_surat, asal_surat, tgl_surat, disposisi |
-| `undangan` | Undangan rapat/acara | tgl_acara, tempat, diperuntukan |
-| `masuk_penting` | Surat masuk prioritas | disposisi_ketua, tgl_diteruskan |
-| `keluar` | Surat keluar Dewan | kepada, pengolah |
-| `keluar_sekwan` | Surat keluar Sekretariat | kepada, pengolah |
-| `rahasia` | Surat rahasia | audit_log enabled |
+| Kategori        | Deskripsi                | Fields Utama                                  |
+| --------------- | ------------------------ | --------------------------------------------- |
+| `masuk_biasa`   | Surat masuk biasa        | nomor_surat, asal_surat, tgl_surat, disposisi |
+| `undangan`      | Undangan rapat/acara     | tgl_acara, tempat, diperuntukan               |
+| `masuk_penting` | Surat masuk prioritas    | disposisi_ketua, tgl_diteruskan               |
+| `keluar`        | Surat keluar Dewan       | kepada, pengolah                              |
+| `keluar_sekwan` | Surat keluar Sekretariat | kepada, pengolah                              |
+| `rahasia`       | Surat rahasia            | audit_log enabled                             |
 
 ## 🔒 Security
 
@@ -263,7 +279,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 👥 Authors
 
-- **Sayyid Fakhri** - *Initial work* - [sayyidfn](https://github.com/sayyidfn)
+- **Sayyid Fakhri** - _Initial work_ - [sayyidfn](https://github.com/sayyidfn)
 
 ## 🙏 Acknowledgments
 

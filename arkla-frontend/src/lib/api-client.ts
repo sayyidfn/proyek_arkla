@@ -46,7 +46,8 @@ class APIClient {
 
       if (!response.ok) {
         const error = await response.json().catch(() => ({}));
-        const errorMessage = error.message || error.detail || `API Error: ${response.status}`;
+        const errorMessage =
+          error.message || error.detail || `API Error: ${response.status}`;
         throw new Error(errorMessage);
       }
 
@@ -54,7 +55,9 @@ class APIClient {
     } catch (error) {
       // Handle network errors
       if (error instanceof TypeError && error.message === "Failed to fetch") {
-        throw new Error("Tidak dapat terhubung ke server. Periksa koneksi internet Anda.");
+        throw new Error(
+          "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
+        );
       }
       throw error;
     }
@@ -143,20 +146,26 @@ class APIClient {
       if (!response.ok) {
         const error = await response.json().catch(() => ({}));
         const errorMessage = error.detail || error.message || error.code;
-        
+
         // Map error codes to user-friendly messages
         if (error.code === "GEMINI_CONFIG_ERROR") {
-          throw new Error("Server belum dikonfigurasi untuk memproses dokumen. Hubungi administrator.");
+          throw new Error(
+            "Server belum dikonfigurasi untuk memproses dokumen. Hubungi administrator.",
+          );
         } else if (error.code === "INVALID_FILE") {
-          throw new Error("Format file tidak didukung. Gunakan PDF, JPG, atau PNG.");
+          throw new Error(
+            "Format file tidak didukung. Gunakan PDF, JPG, atau PNG.",
+          );
         } else if (error.code === "FILE_TOO_LARGE") {
           throw new Error("Ukuran file terlalu besar. Maksimal 10MB.");
         } else if (error.code === "OCR_FAILED") {
-          throw new Error("Gagal memproses gambar. Pastikan gambar jelas dan tidak rusak.");
+          throw new Error(
+            "Gagal memproses gambar. Pastikan gambar jelas dan tidak rusak.",
+          );
         } else if (response.status === 500) {
           throw new Error("Terjadi kesalahan server. Coba lagi nanti.");
         }
-        
+
         throw new Error(errorMessage || `Error: ${response.status}`);
       }
 
@@ -170,7 +179,9 @@ class APIClient {
           );
         }
         if (error.message === "Failed to fetch") {
-          throw new Error("Tidak dapat terhubung ke server. Periksa koneksi internet Anda.");
+          throw new Error(
+            "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
+          );
         }
       }
       throw error;
