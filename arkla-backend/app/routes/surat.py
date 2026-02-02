@@ -20,11 +20,7 @@ async def verify_surat(request: VerifyRequest):
     extracted_data = request.extracted_data
     kode_arsip = request.kode_arsip
     
-    logger.info(f"Verifying surat", extra={
-        "surat_id": surat_id,
-        "extracted_data_keys": list(extracted_data.keys()) if extracted_data else [],
-        "isi_ringkas_value": extracted_data.get('isi_ringkas') if extracted_data else None
-    })
+    logger.info(f"Verifying surat: {surat_id}")
     
     try:
         with get_db() as conn:
@@ -56,14 +52,6 @@ async def verify_surat(request: VerifyRequest):
             
             year = datetime.now().year
             nomor_urut_display = f"{nomor_urut:04d}/{kategori.upper()}/{year}"
-            
-            # Log what we're about to save
-            isi_ringkas_to_save = extracted_data.get('isi_ringkas')
-            logger.info(f"About to update surat", extra={
-                "surat_id": surat_id,
-                "isi_ringkas_to_save": isi_ringkas_to_save,
-                "kode_arsip": kode_arsip
-            })
             
             # Update main surat table
             # Reset requires_manual_review to 0 when verified (user has reviewed and confirmed)

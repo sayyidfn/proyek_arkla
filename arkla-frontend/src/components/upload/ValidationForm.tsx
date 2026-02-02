@@ -207,8 +207,7 @@ export default function ValidationForm({
   };
 
   const handleRegenerate = () => {
-    // Could implement regenerate summary here
-    console.log("Regenerate summary");
+    // TODO: Implement regenerate summary feature if needed
   };
 
   const fields = fieldsByKategori[result.kategori] || [];

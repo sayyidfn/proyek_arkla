@@ -1,53 +1,232 @@
-# ARKLA - Sistem Arsip Kedinasan Lainnya
+# ARKLA - Sistem Arsip Kedinasan DPRD Sleman
 
-[![Backend](https://img.shields.io/badge/Backend-FastAPI-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com/)
-[![Frontend](https://img.shields.io/badge/Frontend-Next.js-000000?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![Backend](https://img.shields.io/badge/Backend-FastAPI-009688?style=flat-square&logo=fastapi)](https://sayyidfn-arkla-backend.hf.space/docs)
+[![Frontend](https://img.shields.io/badge/Frontend-Next.js-000000?style=flat-square&logo=next.js)](https://proyekarkla.vercel.app)
 [![AI](https://img.shields.io/badge/AI-Google%20Gemini-4285F4?style=flat-square&logo=google)](https://ai.google.dev/)
-[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 
-Sistem manajemen arsip digital untuk DPRD Kabupaten Sleman dengan fitur OCR dan AI-powered data extraction menggunakan Google Gemini.
+> Sistem manajemen arsip digital dengan OCR dan AI extraction menggunakan Google Gemini API
 
-![ARKLA Dashboard](docs/dashboard-preview.png)
+## ⚡ Live Demo
 
-## 📋 Fitur Utama
+- **Frontend**: [proyekarkla.vercel.app](https://proyekarkla.vercel.app)
+- **Backend API**: [sayyidfn-arkla-backend.hf.space](https://sayyidfn-arkla-backend.hf.space/docs)
 
-- **📄 OCR & AI Extraction** - Upload dokumen (PDF/JPG/PNG) dan ekstrak data otomatis menggunakan Google Gemini
-- **📁 6 Kategori Surat** - Masuk Biasa, Undangan, Masuk Penting, Keluar Dewan, Keluar Sekwan, Rahasia
-- **🔍 Pencarian & Filter** - Cari berdasarkan kode arsip, tanggal, isi ringkas
-- **📊 Dashboard Statistik** - Monitoring jumlah arsip, pending review, akurasi AI
-- **📥 Export Data** - Export ke Excel/CSV sesuai format DPRD
-- **🖨️ Cetak Disposisi** - Generate lembar disposisi siap cetak
+## 🎯 Fitur Utama
+
+| Fitur | Deskripsi |
+|-------|-----------|
+| 📄 **OCR & AI Extraction** | Upload PDF/JPG/PNG, ekstrak data otomatis dengan Gemini AI |
+| 📁 **6 Kategori Surat** | Masuk Biasa, Undangan, Masuk Penting, Keluar, Keluar Sekwan, Rahasia |
+| 🔍 **Pencarian & Filter** | Cari berdasarkan kategori, tanggal, kode arsip, atau isi ringkas |
+| 📊 **Dashboard Statistik** | Monitor total arsip, pending review, tingkat akurasi AI |
+| 📥 **Export Data** | Export ke Excel/CSV dengan format standar DPRD |
+| 🖨️ **Lembar Disposisi** | Generate dan cetak lembar disposisi format A5 |
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ (untuk frontend)
+- Python 3.12+ (untuk backend)
+- Google Gemini API Key
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/sayyidfn/proyek_arkla.git
+cd proyek_arkla
+```
+
+### 2. Setup Backend
+```bash
+cd arkla-backend
+python -m venv venv
+venv\Scripts\activate  # Windows
+# atau
+source venv/bin/activate  # Linux/Mac
+
+pip install -r requirements.txt
+```
+
+### 3. Environment Variables
+Buat file `.env` di folder `arkla-backend/`:
+```env
+GOOGLE_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-2.5-flash
+DEBUG=true
+ENVIRONMENT=development
+```
+
+### 4. Jalankan Backend
+```bash
+python run.py
+# Server berjalan di http://localhost:8000
+```
+
+### 5. Setup Frontend
+```bash
+cd ../arkla-frontend
+npm install
+npm run dev
+# Frontend berjalan di http://localhost:3000
+```
 
 ## 🛠️ Tech Stack
 
-### Backend
+**Backend:**
+- FastAPI (Python 3.12)
+- SQLite Database
+- Google Gemini API
+- OpenCV & Pillow
 
-- **Framework**: FastAPI (Python 3.12)
-- **Database**: SQLite
-- **AI/ML**: Google Gemini API (gemini-2-flash)
-- **Image Processing**: OpenCV (headless), Pillow
+**Frontend:**
+- Next.js 15 + TypeScript
+- Tailwind CSS
+- React 19
 
-### Frontend
+**Deployment:**
+- Backend: Hugging Face Spaces
+- Frontend: Vercel
 
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **State**: React Hooks
-
-### Deployment
-
-- **Backend**: Koyeb (Docker)
-- **Frontend**: Vercel
-- **Repository**: GitHub
-
-## 📦 Struktur Proyek
+## 📁 Struktur Proyek
 
 ```
-proyek_arkla/
-├── arkla-backend/           # FastAPI Backend
-│   ├── app/
-│   │   ├── core/            # Config, database, utilities
-│   │   ├── models/          # Pydantic schemas
+arkla-backend/
+├── app/
+│   ├── core/          # Configuration & database
+│   ├── models/        # Pydantic schemas  
+│   ├── routes/        # API endpoints
+│   ├── services/      # Business logic
+│   └── main.py        # FastAPI app
+├── database/          # SQLite files
+├── uploads/           # Uploaded files
+└── requirements.txt
+
+arkla-frontend/
+├── src/
+│   ├── app/          # Next.js App Router
+│   ├── components/   # React components
+│   └── lib/          # Utilities & types
+├── public/           # Static assets
+└── package.json
+```
+
+## 🔧 Konfigurasi
+
+### Environment Variables
+
+**Backend (`.env`):**
+```env
+# Google Gemini
+GOOGLE_API_KEY=your_api_key
+GEMINI_MODEL=gemini-2.5-flash
+
+# Server
+HOST=0.0.0.0
+PORT=8000
+DEBUG=true
+ENVIRONMENT=development
+
+# Database
+DATABASE_PATH=database/arkla.db
+
+# CORS (pisah dengan koma)
+CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+```
+
+**Frontend (`.env.local`):**
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+```
+
+## 📚 API Endpoints
+
+**Core Endpoints:**
+- `POST /api/v1/process-surat` - Upload & proses dokumen
+- `POST /api/v1/verify` - Verifikasi & simpan data
+- `GET /api/v1/surat` - List semua surat
+- `GET /api/v1/surat/{id}` - Detail surat
+- `POST /api/v1/export` - Export data ke Excel/CSV
+
+**Dokumentasi lengkap:** [Backend API Docs](https://sayyidfn-arkla-backend.hf.space/docs)
+
+## 🔄 Development Workflow
+
+### 1. Menambah Fitur Baru
+```bash
+# Buat branch baru
+git checkout -b feature/nama-fitur
+
+# Development
+# ... kode ...
+
+# Test & commit
+git add .
+git commit -m "feat: tambah fitur baru"
+git push origin feature/nama-fitur
+```
+
+### 2. Deployment
+
+**Backend ke Hugging Face Spaces:**
+- Push ke GitHub (auto-deploy)
+
+**Frontend ke Vercel:**
+- Push ke GitHub (auto-deploy)
+
+## 🐛 Troubleshooting
+
+### Backend Issues
+
+**"GOOGLE_API_KEY not configured"**
+```bash
+# Set environment variable
+export GOOGLE_API_KEY="your_api_key"
+# atau tambah di file .env
+```
+
+**"Module not found"**
+```bash
+# Install dependencies
+pip install -r requirements.txt
+```
+
+**Database error**
+```bash
+# Reset database
+rm database/arkla.db
+python -c "from app.core.database import init_database; init_database()"
+```
+
+### Frontend Issues
+
+**API connection error**
+- Cek backend berjalan di port 8000
+- Cek `NEXT_PUBLIC_API_URL` di `.env.local`
+
+**Build error**
+```bash
+# Clean install
+rm -rf node_modules package-lock.json
+npm install
+```
+
+## 📄 License
+
+MIT License - lihat [LICENSE](LICENSE) untuk detail.
+
+## 👥 Contributors
+
+- **Sayyid Faisal Naufal** - [sayyidfn](https://github.com/sayyidfn)
+
+---
+
+**💡 Tips:**
+- Gunakan gambar berkualitas tinggi untuk OCR lebih akurat
+- Kategorikan surat dengan benar untuk data yang terstruktur  
+- Lakukan verifikasi manual untuk data penting
+- Export data secara berkala sebagai backup
+
+**📞 Support:**
+Jika ada masalah atau pertanyaan, buat [issue di GitHub](https://github.com/sayyidfn/proyek_arkla/issues).
 │   │   ├── routes/          # API endpoints
 │   │   └── services/        # Business logic (Gemini, OCR)
 │   ├── database/            # SQLite database

@@ -50,5 +50,5 @@ export const API_BASE_URL = getApiBaseUrl();
 
 // Log the final URL being used (helpful for debugging)
 if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-  console.log("[Config] Using API URL:", API_BASE_URL);
+  // API configuration set for development
 }
