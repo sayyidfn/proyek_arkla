@@ -1,9 +1,15 @@
+"""
+ARKLA Backend - Document Processing System for DPRD Sleman
+FastAPI application with Google Gemini AI integration for OCR and data extraction.
+"""
+
 import os
 import logging
 import traceback
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 
@@ -14,9 +20,10 @@ from app.routes import process, surat, export, master_data
 # Load environment variables
 load_dotenv()
 
-# Configure logging
+# Configure logging based on environment
+log_level = logging.DEBUG if os.getenv("ENVIRONMENT") == "development" else logging.INFO
 logging.basicConfig(
-    level=logging.INFO,
+    level=log_level,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
@@ -24,28 +31,32 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    """Application lifespan handler for startup and shutdown events."""
     # Startup
-    logger.info("Starting ARKLA Backend...")
+    logger.info("=" * 50)
+    logger.info("Starting ARKLA Backend v1.0.0")
     logger.info(f"Environment: {os.getenv('ENVIRONMENT', 'development')}")
+    logger.info("=" * 50)
     
     # Create required directories
-    os.makedirs("uploads", exist_ok=True)
-    os.makedirs("output", exist_ok=True)
-    os.makedirs("database", exist_ok=True)
+    for directory in ["uploads", "output", "database"]:
+        os.makedirs(directory, exist_ok=True)
     
     # Initialize database
     try:
         init_database()
-        logger.info("Database initialized successfully")
+        logger.info("✅ Database initialized successfully")
     except Exception as e:
-        logger.error(f"Database initialization failed: {e}")
+        logger.error(f"❌ Database initialization failed: {e}")
         raise
     
     # Verify Gemini API key
     if not os.getenv("GOOGLE_API_KEY"):
-        logger.warning("⚠️ GOOGLE_API_KEY not set! Gemini features will not work.")
+        logger.warning("⚠️  GOOGLE_API_KEY not set! OCR features will not work.")
     else:
         logger.info("✅ Gemini API key configured")
+    
+    logger.info("🚀 ARKLA Backend ready to serve requests")
     
     yield
     
@@ -56,8 +67,10 @@ async def lifespan(app: FastAPI):
 # Create FastAPI app
 app = FastAPI(
     title="ARKLA API",
-    description="Document Processing System for DPRD Sleman",
+    description="Document Processing System for DPRD Kabupaten Sleman",
     version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
     lifespan=lifespan
 )
 
@@ -65,26 +78,33 @@ app = FastAPI(
 # Global exception handler
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
-    logger.error(f"Unhandled exception: {exc}\n{traceback.format_exc()}")
+    """Handle all unhandled exceptions gracefully."""
+    logger.error(f"Unhandled exception on {request.url}: {exc}\n{traceback.format_exc()}")
+    
+    is_production = os.getenv("ENVIRONMENT") == "production"
     return JSONResponse(
         status_code=500,
         content={
             "status": "error",
             "code": "INTERNAL_SERVER_ERROR",
-            "message": "An unexpected error occurred. Please try again.",
-            "detail": str(exc) if os.getenv("ENVIRONMENT") != "production" else None
+            "message": "Terjadi kesalahan server. Silakan coba lagi.",
+            "detail": None if is_production else str(exc)
         }
     )
 
 
-# CORS middleware - must be before routers
+# Middleware stack (order matters - first added = last executed)
+# GZip compression for responses > 500 bytes
+app.add_middleware(GZipMiddleware, minimum_size=500)
+
+# CORS - Allow all origins for flexibility
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["*"],
+    expose_headers=["Content-Disposition"],  # For file downloads
 )
 
 # Include routers
@@ -94,24 +114,26 @@ app.include_router(export.router, prefix="/api/v1", tags=["Export"])
 app.include_router(master_data.router, prefix="/api/v1", tags=["Master Data"])
 
 
-@app.get("/")
+@app.get("/", tags=["Health"])
 async def root():
+    """Root endpoint - basic service info."""
     return {
         "status": "healthy",
         "service": "ARKLA Backend",
         "version": "1.0.0",
-        "environment": os.getenv("ENVIRONMENT", "development")
+        "docs": "/docs"
     }
 
 
-@app.get("/health")
-@app.get("/api/v1/health")
+@app.get("/health", tags=["Health"])
+@app.get("/api/v1/health", tags=["Health"])
 async def health_check():
-    """Health check endpoint for monitoring and load balancers"""
+    """Health check endpoint for monitoring and load balancers."""
     return {
         "status": "healthy",
         "gemini_configured": bool(os.getenv("GOOGLE_API_KEY")),
         "database": "connected",
         "version": "1.0.0"
     }
+
 
