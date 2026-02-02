@@ -34,8 +34,8 @@ class ImagePreprocessor:
     
     MIN_DPI = 150
     TARGET_DPI = 300
-    MAX_DIMENSION = 4096  # Max dimension for processing
-    GEMINI_MAX_DIMENSION = 1024  # Max dimension for Gemini to reduce tokens
+    MAX_DIMENSION = 2048  # Reduced for faster processing on limited resources
+    GEMINI_MAX_DIMENSION = 800  # Reduced for faster API calls (was 1024)
     
     def preprocess(
         self,
@@ -71,8 +71,8 @@ class ImagePreprocessor:
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
             enhanced = clahe.apply(gray)
             
-            # Denoise
-            denoised = cv2.bilateralFilter(enhanced, 9, 75, 75)
+            # Denoise - use lighter filter for speed (was 9, 75, 75)
+            denoised = cv2.bilateralFilter(enhanced, 5, 50, 50)
             
             # Upscale if DPI is low
             upscaled = False

@@ -36,7 +36,8 @@ logger = logging.getLogger(__name__)
 async def process_surat(
     file: UploadFile = File(...),
     category_id: str = Form(...),
-    use_optimized: bool = Form(default=True)
+    use_optimized: bool = Form(default=True),
+    skip_preprocessing: bool = Form(default=False)  # Skip heavy preprocessing for faster processing
 ):
     start_time = time.time()
     surat_id = generate_surat_id()
@@ -124,33 +125,30 @@ async def process_surat(
         with open(original_path, "wb") as f:
             f.write(file_content)
         
-        # Preprocess image
-        preprocess_result = image_preprocessor.preprocess(original_path, upload_dir)
-        
-        if not preprocess_result.success:
-            return JSONResponse(
-                status_code=422,
-                content=format_error_response(
-                    code=ErrorCode.OCR_FAILED,
-                    message=f"Image preprocessing failed: {preprocess_result.error}",
-                    surat_id=surat_id,
-                    details={"step_failed": "preprocessing"}
-                )
-            )
-        
-        processed_path = preprocess_result.processed_path
-        steps_completed.append("preprocessing")
+        # Preprocess image (skip if requested for faster processing)
+        if skip_preprocessing:
+            # Use original file directly - faster but may have lower OCR quality
+            processed_path = original_path
+            logger.info(f"Skipping preprocessing for faster processing", extra={"surat_id": surat_id})
+            steps_completed.append("preprocessing_skipped")
+        else:
+            preprocess_result = image_preprocessor.preprocess(original_path, upload_dir)
+            
+            if not preprocess_result.success:
+                # Fallback to original if preprocessing fails
+                logger.warning(f"Preprocessing failed, using original: {preprocess_result.error}")
+                processed_path = original_path
+                steps_completed.append("preprocessing_fallback")
+            else:
+                processed_path = preprocess_result.processed_path
+                steps_completed.append("preprocessing")
         
     except Exception as e:
         logger.error(f"Preprocessing error: {e}", extra={"surat_id": surat_id})
-        return JSONResponse(
-            status_code=500,
-            content=format_error_response(
-                code=ErrorCode.UNKNOWN_ERROR,
-                message=f"Preprocessing failed: {str(e)}",
-                surat_id=surat_id
-            )
-        )
+        # Fallback to original instead of failing
+        processed_path = original_path
+        logger.warning(f"Using original file due to error: {e}")
+        steps_completed.append("preprocessing_error_fallback")
     
     # ========== OPTIMIZED MODE: Single API Call ==========
     raw_text = ""

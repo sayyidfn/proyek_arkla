@@ -107,20 +107,26 @@ class APIClient {
 
   /**
    * Process uploaded surat (OCR + AI extraction)
+   * @param file - The file to process
+   * @param kategori - Document category
+   * @param useOptimized - Use optimized single API call (default: true)
+   * @param skipPreprocessing - Skip image preprocessing for faster processing (default: true for production)
    */
   async processSurat(
     file: File,
     kategori: KategoriSurat,
     useOptimized: boolean = true,
+    skipPreprocessing: boolean = true,  // Skip preprocessing by default for faster processing
   ): Promise<ProcessSuratResponse> {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("category_id", kategori);
     formData.append("use_optimized", String(useOptimized));
+    formData.append("skip_preprocessing", String(skipPreprocessing));
 
-    // Use AbortController for timeout (180 seconds for OCR processing)
+    // Use AbortController for timeout (120 seconds - reduced for faster feedback)
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 180000);
+    const timeoutId = setTimeout(() => controller.abort(), 120000);
 
     try {
       const response = await fetch(`${this.baseUrl}/process-surat`, {
