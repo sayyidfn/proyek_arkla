@@ -57,6 +57,14 @@ async def verify_surat(request: VerifyRequest):
             year = datetime.now().year
             nomor_urut_display = f"{nomor_urut:04d}/{kategori.upper()}/{year}"
             
+            # Log what we're about to save
+            isi_ringkas_to_save = extracted_data.get('isi_ringkas')
+            logger.info(f"About to update surat", extra={
+                "surat_id": surat_id,
+                "isi_ringkas_to_save": isi_ringkas_to_save,
+                "kode_arsip": kode_arsip
+            })
+            
             # Update main surat table
             cursor.execute("""
                 UPDATE surat SET
