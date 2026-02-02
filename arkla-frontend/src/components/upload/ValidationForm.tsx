@@ -163,8 +163,12 @@ export default function ValidationForm({
     if (result.extracted_data) {
       const initialData: Record<string, string> = {};
       Object.entries(result.extracted_data).forEach(([key, value]) => {
-        if (value) initialData[key] = String(value);
+        // Include all values, even empty strings (but not null/undefined)
+        if (value !== null && value !== undefined) {
+          initialData[key] = String(value);
+        }
       });
+      // Also set isi_ringkas from top-level response if available
       if (result.isi_ringkas) {
         initialData.isi_ringkas = result.isi_ringkas;
       }
