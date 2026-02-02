@@ -110,13 +110,13 @@ class APIClient {
    * @param file - The file to process
    * @param kategori - Document category
    * @param useOptimized - Use optimized single API call (default: true)
-   * @param skipPreprocessing - Skip image preprocessing for faster processing (default: true for production)
+   * @param skipPreprocessing - Skip image preprocessing (default: false - preprocessing helps with low quality images)
    */
   async processSurat(
     file: File,
     kategori: KategoriSurat,
     useOptimized: boolean = true,
-    skipPreprocessing: boolean = true,  // Skip preprocessing by default for faster processing
+    skipPreprocessing: boolean = false,  // Enable preprocessing by default for better OCR quality
   ): Promise<ProcessSuratResponse> {
     const formData = new FormData();
     formData.append("file", file);
