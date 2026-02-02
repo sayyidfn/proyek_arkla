@@ -188,7 +188,7 @@ function ArchiveContent() {
       // Use API client's base URL for consistency
       const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL 
         ? `${process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, "")}/api/v1`
-        : "https://sheer-gussi-proyrk-arkla-b4f4b3ae.koyeb.app/api/v1";
+        : "https://sayyidfn-arkla-backend.hf.space/api/v1";
       const url = `${apiBaseUrl}/export?${params.toString()}`;
       window.open(url, "_blank");
 

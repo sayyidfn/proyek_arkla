@@ -3,8 +3,8 @@
  * Centralized config to ensure consistency across the app
  */
 
-// Production API URL - hardcoded as fallback for reliability
-const PRODUCTION_API_URL = "https://sheer-gussi-proyrk-arkla-b4f4b3ae.koyeb.app/api/v1";
+// Production API URL - Hugging Face Spaces
+const PRODUCTION_API_URL = "https://sayyidfn-arkla-backend.hf.space/api/v1";
 const LOCAL_API_URL = "http://localhost:8000/api/v1";
 
 /**
