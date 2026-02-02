@@ -1,0 +1,16 @@
+{
+  "name": "ARKLA - Sistem Arsip Cerdas",
+  "short_name": "ARKLA",
+  "description": "Sistem Arsip Cerdas DPRD Kabupaten Sleman",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2C5F6F",
+  "icons": [
+    {
+      "src": "/iconarkla.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+kode,indeks,keterangan
+000.1.10,Ketertiban dan Keamanan,Ketertiban dan Keamanan
+000.1.2.2,Perjalanan Dinas DPRD/SPPD dan SPT,Perjalanan Dinas DPRD
+000.1.2.2,Study Banding/Kunjungan DPRD,Perjalanan Dinas DPRD
+000.1.2.3,Perjalanan Dinas Peqgawai/SPPD dan SPT,Perjalanan Dinas Pegawai
+000.1.2.3,Study Banding/Kunjungan,Perjalanan Dinas Pegawai
+000.1.4,"Pinjam Tempat (gedung, halaman, parkir)","Penggunaan Fasilitas Kantor (antara lain: permintaan dan penggunaan ruang, gedung, kendaraan, wisma, rumah dinas dan fasilitas kantor lainnya)"
+000.1.5,Rakorpim,Rapat Pimpinan Daerah
+000.1.5,Rapat Paripurna,"Rapat Pimpinan, antara lain: Notula/Risalah Rapat"
+000.1.6,Penyediaan Konsumsi,Penyediaan Konsumsi Rapat-rapat
+000.1.7.2,Pemeliharaan Kendaraan Dinas,Pemeliharaan dan Perbaikan
+000.1.7.4,Kuasa Pengguna Kendaraan Dinas,Kuasa Pengguna Kendaraan Dinas
+000.1.7.5,Pinjam Kendaraan Dinas,Pemimjaman Kendaraan Dinas
+000.1.8.2,Penghijauan ,Penghijauan Lingkungan kantor
+000.1.8.3,Pemeliharaan/Perbaikan Gedung,Pemeliharaan/Perbaikan Gedung
+000.1.8.4,Pemeliharaan/Perbaikan Peralatan Kantor,Pemeliharaan/Perbaikan Peralatan Kantor
+000.1.8.6,Kebersihan Gedung dan Taman,Kebersihan Gedung dan Taman
+000.1.9,Jaringan Listrik/Air/Telpon/Komputer/Internet,"Pengelolaan Jaringan Listrik, Air, Telepon, Komputer dan Internet"
+000.10.10,Pengendalian dan Pengawasan BMD,Pengendalian dan Pengawasan Barang Milik Daerah
+000.10.3,RKBU,Perencanaan kebutuhan barang milik daerah
+000.10.4,Pengadaan BMD,Pengadaan Barang Milik Daerah
+000.10.9,Pemindahtanganan dan Penghapusan BMD,Pemindahtanganan dan Penghapusan Barang Milik Daerah
+000.2.1,Inventaris,Inventarisasi dan Penyimpanan
+000.2.4,Penghapusan BMD,"Penghapusan Barang Milik Daerah antara lain: Keputusan Pembentukan Tim, Berita Acara Penghapusan Barang Milik Daerah, Daftar Barang yang dihapuskan, Laporan hasil pelaksanaan Penghapusan BMD termasuk didalamnya Proses penghapusan"
+000.2.5,Pengelolaan Database Barang Milik Daerah,Pengelolaan Database Barang Milik Daerah
+000.3,Penawaran Barang/Jasa,Pengadaan
+000.3.2,Pengadaan Langsung (Barang/Jasa Lainnya),"Pengadaan Langsung (antara lain: Persiapan Pemilihan Penyedia, Pelaksanaan Pemilihan Penyedia, Penandatanganan Kontrak, Pelaksanaan Kontrak)"
+000.3.3,Pengadaan Lelang (Barang/Jasa Lainnya),"Pengadaan Tidak Langsung/Lelang (antara lain: Persiapan Pemilihan Penyedia, Pelaksanaan Pemilihan Penyedia, Penandatanganan Kontrak, Pelaksanaan Kontrak)"
+000.4,Perpustakaan,PERPUSTAKAAN
+000.5,Kearsipan,KEARSIPAN
+000.5.1,Kebijakan Kearsipan,Kebijakan di Bidang Kearsipan yang dilakukan oleh Pemerintah Daerah
+000.5.15,Pengawasan Kearsipan,Pengawasan Kearsipan
+000.5.2.11,JRA,"Jadwal Retensi Arsip, antara lain: Berkas Usulan Persetujuan JRA, Surat Persetujuan JRA dari Kepala ANRI"
+000.5.2.12,Sosialisasi/Bimtek Kearsipan,"Sosialisasi, Penyuluhan, Bimtek, Pendampingan, Apresiasi"
+000.5.2.13,Forum Komunikasi Arsiparis (FKA),"Organisasi Kearsipan antara lain AAI,Forkom, FMK"
+000.5.6,Penyusutan Arsip,Penyusutan Arsip
+000.6.5.6,Pelaksanaan Penerbitan Sertifikat Elektronik,Pelaksanaan Penerbitan Sertifikat Elektronik
+000.7.1,Musyawarah Perencanaan Pembangunan/Musrenbang,Musyawarah Perencanaan Pembangunan/Musrenbang
+000.7.1.3,Musrenbang Kabupaten/Kota,Musrenbang Kabupaten/Kota
+000.7.1.4,Musrenbang Kecamatan,Musrenbang Kecamatan
+000.7.1.5,Musrenbang Kelurahan,Musrenbang Kelurahan
+000.7.2.1,Rencana Pembangunan Jangka Panjang,Rencana Pembangunan Jangka Panjang
+000.7.2.10,Evaluasi Program,Evaluasi Program
+000.7.2.2,Rencana Pembangunan Jangka Menengah (RPJM/Renstra),Rencana Pembangunan Jangka Menengah
+000.7.2.4,Rencana Pembangunan Tahunan (Renja),Rencana Pembangunan Tahunan
+000.7.2.6,Program kerja tahunan,Program kerja tahunan
+000.7.2.8,"Laporan Berkala (Laporan tahunan, laporan bulanan)",Laporan Berkala
+000.8.1,SOTK,Struktur Organisasi di lingkungan Pemerintahan Daerah Kabupaten/Kota
+000.8.2,Anjab/ABK,Uraian Jabatan
+000.8.3,Pelayanan Umum,Ketatalaksanaan
+000.8.3.3,Standar Operasional Prosedur/SOP,Standar Operasional Prosedur
+000.8.5,Evaluasi Kelembagaan,Evaluasi Kelembagaan
+000.8.6.2,Reformasi Birokrasi,Penilaian Mandiri Reformasi Birokrasi
+000.8.6.3,LAKIP (Laporan akuntabilitas kinerja instansi Pemerintah),Akuntabilitas Kinerja Instansi Pemerintah
+000.8.6.3,Penilaian Kinerja OPD,Akuntabilitas Kinerja Instansi Pemerintah
+000.9.2,Ijin Penelitian,"Penelitian, Pengkajian dan Pengembangan Meliputi: Rencana Kerja, Administrasi Penelitian, Pelaksanaan, Hasil Penelitian/Pengkajian/Rekomendasi"
+100.1.4.1,Pilkada,Penyelenggaraan Pemilihan Umum Kepala Daerah
+100.1.4.2,Surat Keterangan Tidak Menunjang,Administrasi Kepala Daerah dan Dewan Perwakilan Rakyat Daerah (DPRD)
+100.1.4.5,Assosiasi Daerah,Assosiasi Daerah
+100.1.7,LKPJ/LKPJAMJ/LPPD,"Laporan Keterangan Pertanggungjawaban (LKPJ)/ Laporan Keterangan Pertanggungjawaban Akhir Masa Jabatan (LKPJAMJ),Laporan Penyelenggaraan Pemerintah Daerah (LPPD) dan Standar Pelayanan Minimal (SPM), (Fasilitasi, Monitoring dan Evaluasi)"
+100.1.7,LKPJ Bupati/ LPPD,"Laporan Keterangan Pertanggungjawaban (LKPJ)/ Laporan Keterangan Pertanggungjawaban Akhir Masa Jabatan (LKPJAMJ),Laporan Penyelenggaraan Pemerintah Daerah (LPPD) dan Standar Pelayanan Minimal (SPM), (Fasilitasi, Monitoringdan Evaluasi)"
+100.3.10,Bantuan Hukum,"Bantuan/Konsultasi Hukum/ Advokasi Pemberian bantuan/ konsultasi hukum (Pidana, Perdata, Tata Usaha Negara dan Agama)"
+100.3.11,Kasus/ Sengketa Hukum,Kasus/ Sengketa Hukum
+100.3.13,Hak atas Kekayaan Intelektual (HAKI),Hak atas Kekayaan Intelektual (HAKI)
+100.3.7,MOU/Kerjasama,Nota Kesepakatan/Memorandum of Understanding (MOU)/Kontrak/ Perjanjian kerja sama
+100.3.8,Peraturan Perundang-Undangan,"Dokumentasi Hukum, (antara lain: Undang- Undang, Peraturan Pemerintah, Keputusan Presiden dan Peraturan-Peraturan yang dijadikan referensi)"
+200.2,PEMILU,PEMILU
+300.1.5,Penyidik Pegawai Negeri Sipil,Penyidik Pegawai Negeri Sipil
+300.2,Bencana,"PENANGGULANGAN BENCANA, PENCARIAN, DAN PERTOLONGAN"
+400.10.2,Pemerintahan Desa dan Kelurahan,Pemerintahan Desa dan Kelurahan
+400.11.3,Pemakaman,Pemakaman
+400.14.1.1,Peringatan Hari Besar Nasional,"Penyelenggaraan acara kedinasan (upacara, pelantikan, peresmian, dan jamuan termasuk acara peringatan hari-hari besar)"
+400.14.1.1,Hari Jadi Kab Sleman,"Penyelenggaraan acara kedinasan (upacara, pelantikan, peresmian, dan jamuan termasuk acara peringatan hari-hari besar)"
+400.14.10,"Pameran/sayembara/lomba/festival,pembuatan spanduk dan iklan","Pameran/sayembara/lomba/festival,pembuatan spanduk dan iklan"
+400.14.11,"Kenang-kenangan, Vandal/Plakat, Souvenir, Tropy",Penghargaann /tanda kenang kenangan permohonan : plakat/vandal souvenir trophy
+400.14.12,Ucapan,"Ucapan terimakasih,ucapan selamat,ucapan bela sungkawa,permohonan maaf mohon diri"
+400.14.2,Daftar nama/alamat kantor /pejabat,Daftar nama/alamat kantor /pejabat
+400.14.3,Annual report/foto pejabat /profil SKPD,"Dokumentasi/liputan kegiatan dinas pimpinan, acara kedinasan dan peristiwa-peristiwa bidang masing-masing, dalam berbagai media: kertas, foto/video/ rekaman suara/ multi media"
+400.14.3,Sleman Dalam Angka,"Dokumentasi/liputan kegiatan dinas pimpinan, acara kedinasan dan peristiwa-peristiwa bidang masing-masing, dalam berbagai media: kertas, foto/video/ rekaman suara/ multi media"
+400.14.5.4,Magang/PKL/Prakerin,"Hubungan dengan Perguruan tinggi/sekolah termasuk magang,pendidikan Sistem Ganda (PGS) /Praktek kerja Lapangan(PKL)"
+400.14.6,Dengar pendapat/hearing DPRD/Audiensi,Dengar pendapat/hearing DPRD/Audiensi
+400.14.8,Media Masa,"Penerbitan majalah, buletin, koran dan jurnal"
+400.2.2,"Pengarusutamaan Gender Ekonomi, Politik Sosial dan Hukum","Pengarusutamaan Gender Ekonomi, Politik Sosial dan Hukum"
+400.4,Olahraga,KEOLAHRAGAAN
+400.4.10.1,PORDA/Por Korpri Kabupaten,Olahraga Prestasi daerah
+400.4.10.2,PORNAS/Por Korpri Nasional,Olahraga Prestasi Naional
+400.6,KEBUDAYAAN,KEBUDAYAAN
+400.6.5.1,Internalisasi Budaya Satriya,Internalisasi nilai budaya
+400.7,KESEHATAN,KESEHATAN
+400.7.17,Kesehatan Kerja,Kesehatan kerja dan Olah raga
+400.7.2.11,PMI/Donor darah,"Unit transfusi darah, bank darah rumah sakit dan jejaring pelayanan darah"
+400.7.6.4,Narkotika,Pencegahan dan penanggulan narkotika dan sejenisnya
+400.8.2.8,Haji,Haji
+400.8.4.1,BAZ/Zakat,Islam
+400.8.4.3,Kristen Katolik,Kristen Katolik
+400.8.4.5,Budha,Budha
+400.8.4.6,Konghuchu,Konghuchu
+400.9.10,Bencana Alam,Perlindungan Sosial Korban Bencana Alam
+400.9.7,Bantuan Sosial,Pengumpulan dan Pengelolaan sumber dana bantuan sosial
+500.15.14.1.2,UMP (Upah Minimum Porvinsi),UMP
+500.15.14.1.3,UMK (Upah Minimum Kabupaten),UMK
+700.1.2,Pengawasan,Pelaksanaan Pengawasan
+700.1.2.1,LHP,"Laporan Hasil Audit (LHA), Tindak Lanjut Hasil Audit, Laporan Hasil Pemeriksaan (LHP), Tindak Lanjut Hasil Pemeriksaan, Laporan Hasil Pemeriksaan Operasional (LHPO), Tindak Lanjut Hasil Pemeriksaan Operasional, Laporan Hasil Evaluasi (LHE),Tindak Lanjut Laporan Hasil Evaluasi, Laporan Akuntan LA), Laporan Auditor Independen (LAI) yang memerlukan tindak lanjut (TL)"
+800.1.1.1,Rencana Kebutuhan ASN,"Perencanaan Kebutuhan Aparatur Sipil Negara Antara lain: Bahan penyusunan rencana kebutuhan, Analisis Kebutuhan, Pengolahan data kebutuhan"
+800.1.1.2,Pertimbangan Formasi,"Perencanaan Pertimbangan Formasi Antara lain: Pertimbangan teknis penetapan formasi ASN, Pertimbangan teknis penetapan formasi ikatan dinas"
+800.1.1.3,Penetapan Kebutuhan ASN,Penetapan Kebutuhan Aparatur Sipil Negara
+800.1.1.4,Standar Kompetensi Jabatan/ Teknis,"Standarisasi Jabatan Antara lain: Informasi Jabatan, Kompetensi Jabatan, Klasifikasi Jabatan"
+800.1.11,Rekap Cuti/ Jumlah ASN,Administrasi Pegawai
+800.1.11.10,Laporan Pajak Penghasilan Pribadi (LP2P),Laporan Pajak Penghasilan Pribadi (LP2P)
+800.1.11.10.1,Laporan Harta Kekayaan Penyelenggara Negara/LHKPN,Laporan Harta Kekayaan Penyelenggara Negara
+800.1.11.10.2,LHKASN,LHKASN
+800.1.11.11,KP4,Keterangan Penerimaan Pembayaran Penghasilan Pegawai (KP4)
+800.1.11.12,Daftar Urut Kepangkatan (DUK),Daftar Urut Kepangkatan (DUK)
+800.1.11.13,TPP,"Pengurusan Kenaikan Gaji Berkala, Mutasi Gaji/Tunjangan"
+800.1.11.13,Kenaikan gaji Berkala/KGB,"Pengurusan Kenaikan Gaji Berkala, Mutasi Gaji/Tunjangan"
+800.1.11.13,Mutasi gaji/tunjangan,"Pengurusan Kenaikan Gaji Berkala, Mutasi Gaji/Tunjangan"
+800.1.11.2,Cuti Sakit,Cuti Sakit
+800.1.11.3,Cuti Melahirkan,Cuti Melahirkan
+800.1.11.4,Cuti Tahunan,Cuti Tahunan
+800.1.11.5,Cuti Alasan Penting,Cuti Alasan Penting
+800.1.11.6,Cuti Besar,Cuti Besar
+800.1.11.7,Cuti Di luar Tanggungan Negara,Cuti Di luar Tanggungan Negara
+800.1.11.8,Kartu pegawai/Karpeg,Karpeg/Kartu ASN Virtual/Kartu Pegawai Elektronik/Karis/Karsu/Kartu TASPEN
+800.1.11.8,kartu Isteri/Kartu Suami (Karis/ Karsu)/ Laporan Perkawinan,Karpeg/Kartu ASN Virtual/Kartu Pegawai Elektronik/Karis/Karsu/Kartu TASPEN
+800.1.11.8,Kartu Taspen,Karpeg/Kartu ASN Virtual/Kartu Pegawai Elektronik/Karis/Karsu/Kartu TASPEN
+800.1.11.8,NIP,Karpeg/Kartu ASN Virtual/Kartu Pegawai Elektronik/Karis/Karsu/Kartu TASPEN
+800.1.11.9,Dharmawanita,Keanggotaan Organisasi Profesi/Kedinasan
+800.1.12.1,Pengujian Kesehatan/Laporan PNS Sakit,Pemeliharaan Kesehatan Pegawai
+800.1.12.1,Pengujian Kesehatan (untuk pengangkatan PNS),Pemeliharaan Kesehatan Pegawai
+800.1.12.11,Korpri,Korpri
+800.1.12.14,Bantuan Soslial/Pendidikan,Bantuan Sosial/Pendidikan
+800.1.12.2,Asuransi/BPJS/JKK/JKN,Asuransi Pegawai/BPJS dan JKK-JKN
+800.1.12.3,TAPERA,Tabungan Perumahan
+800.1.12.4,Bantuan Penulisan (Skripsi/Thesis),Bantuan Sosial/Pendidikan
+800.1.12.6,Layanan Pegawai yang Meninggal Karena Dinas dan non dinas,Layanan Pegawai yang Meninggal Karena Dinas dan non dinas
+800.1.12.7,Pemberian Tali Kasih,Pemberian Tali Kasih
+800.1.12.8,Piagam/Tanda Jasa/Penghargaan/ Satya Lancana,Pemberian Piagam Penghargaan dan Tanda Jasa
+800.1.12.9,Rekreasi,Olahraga dan Rekreasi
+800.1.14.1,Penilaian Kompetensi,Penilaian Kompetensi
+800.1.14.2,Hasil Penilaian Kompetensi,Hasil Penilaian Kompetensi
+800.1.14.3,Perjanjian Kerja Sama Penilaian Kompetensi,Perjanjian Kerja Sama Penilaian Kompetensi
+800.1.14.4,Kesepakatan Bersama Penilaian Kompetensi,Kesepakatan Bersama Penilaian Kompetensi
+800.1.15.1,Konseling Corner,Konseling Psikologi
+800.1.15.1,Konseling Pranikah,Konseling Psikologi
+800.1.16,Manajemen SDM (Sistem Merit),Manajemen SDM (Sistem Merit)
+800.1.2,BLUD/ Pegawai Non ASN,Formasi dan Pengadaan Pegawai
+800.1.2.1,Formasi ASN,"Formasi ASN Antara lain: Usulan formasi, Usulan permintaan formasi kepada Menpan RB dan Kepala BKN, Persetujuan Formasi, Penetapan Formasi, Penetapan Formasi Khusus"
+800.1.2.2,Pengadaan ASN,"Proses Rekrutmen/Pengadaan ASN Antara lain: Proses Rekrutmen ASN, Penetapan Rekrutmen ASN, Penetapan Pengumuman Kelulusan ASN"
+800.1.2.3,Pengumuman Kelulusan ASN,Pengumuman Kelulusan ASN
+800.1.2.4,Berkas Lamaran Yang Tidak Diterima,Berkas Lamaran Yang Tidak Diterima
+800.1.2.5,Pengangkatan CPNS,Pengangkatan ASN
+800.1.2.5,Pengangkatan PNS/ Sumpah Janji PNS,Pengangkatan ASN
+800.1.2.5,Pengangkatan P3K,Pengangkatan ASN
+800.1.2.6,Open Biding (Seleksi Terbuka Jabatan),Open Biding (Seleksi Terbuka Jabatan)
+800.1.2.7,Pengelolaan Sistem Rekrutmen ASN,Pengelolaan Sistem Rekrutmen ASN
+800.1.2.8,Fasilitasi Penyelenggaraan Seleksi ASN,Fasilitasi Penyelenggaraan Seleksi ASN
+800.1.3,Kewenangan Mutasi Kepegawaian,Mutasi Pegawai
+800.1.3.1,PLT/PLH,"Usulan Alih Status, Pindah Instansi, Pindah Wilayah Kerja, Diperbantukan, Dipekerjakan, Penugasan Sementara, Mutasi antar Perwakilan, Mutasi ke dan dari Perwakilan, Pemintahan Sementara, Persetujuan/Pertimbangan Kepala BKN"
+800.1.3.1,MAIP Masuk,"Usulan Alih Status, Pindah Instansi, Pindah Wilayah Kerja, Diperbantukan, Dipekerjakan, Penugasan Sementara, Mutasi antar Perwakilan, Mutasi ke dan dari Perwakilan, Pemintahan Sementara, Persetujuan/Pertimbangan Kepala BKN"
+800.1.3.1,MAIP Keluar,"Usulan Alih Status, Pindah Instansi, Pindah Wilayah Kerja, Diperbantukan, Dipekerjakan, Penugasan Sementara, Mutasi antar Perwakilan, Mutasi ke dan dari Perwakilan, Pemintahan Sementara, Persetujuan/Pertimbangan Kepala BKN"
+800.1.3.1,Tenaga Titipan,"Usulan Alih Status, Pindah Instansi, Pindah Wilayah Kerja, Diperbantukan, Dipekerjakan, Penugasan Sementara, Mutasi antar Perwakilan, Mutasi ke dan dari Perwakilan, Pemintahan Sementara, Persetujuan/Pertimbangan Kepala BKN"
+800.1.3.1,Tugas Tambahan,"Usulan Alih Status, Pindah Instansi, Pindah Wilayah Kerja, Diperbantukan, Dipekerjakan, Penugasan Sementara, Mutasi antar Perwakilan, Mutasi ke dan dari Perwakilan, Pemintahan Sementara, Persetujuan/Pertimbangan Kepala BKN"
+800.1.3.1,Penataan Pegawai,"Usulan Alih Status, Pindah Instansi, Pindah Wilayah Kerja, Diperbantukan, Dipekerjakan, Penugasan Sementara, Mutasi antar Perwakilan, Mutasi ke dan dari Perwakilan, Pemintahan Sementara, Persetujuan/Pertimbangan Kepala BKN"
+800.1.3.2,Kenaikan Pangkat/Golongan,Kenaikan Pangkat/Golongan
+800.1.3.3,Pelantikan (Pengangkatan dan Pemberhentian Jabatan Struktural/Fungsional),Pengangkatan dan Pemberhentian Jabatan Struktural/Fungsional
+800.1.3.6,TPKP/Beperjakat,Badan Pertimbangan Jabatan dan Pangkat (BAPERJAKAT/Tim Penilai KINERJA ASN)
+800.1.3.7,Kenaikan Jabatan JFT,"Pengelolaan Jabatan Fungsional (pengusulan, pengangkatan, pemberhentian, kenaikan jenjang, uji kompetensi)"
+800.1.3.7,Uji Kompetensi,"Pengelolaan Jabatan Fungsional (pengusulan, pengangkatan, pemberhentian, kenaikan jenjang, uji kompetensi)"
+800.1.4.1,Ijin Belajar Mandiri,Usulan Tugas Belajar / Ijin Belajar / Diklat / Kursus / Magang / Praktek Kerja di Instansi Lain / Pertukaran antar ASN dengan Pegawai Swasta
+800.1.4.1,Tugas Belajar,Usulan Tugas Belajar / Ijin Belajar / Diklat / Kursus / Magang / Praktek Kerja di Instansi Lain / Pertukaran antar ASN dengan Pegawai Swasta
+800.1.4.1,Pengakhiran Tugas Belajar,Usulan Tugas Belajar / Ijin Belajar / Diklat / Kursus / Magang / Praktek Kerja di Instansi Lain / Pertukaran antar ASN dengan Pegawai Swasta
+800.1.4.1,Perpanjangan Tugas Belajar,Usulan Tugas Belajar / Ijin Belajar / Diklat / Kursus / Magang / Praktek Kerja di Instansi Lain / Pertukaran antar ASN dengan Pegawai Swasta
+800.1.4.1,Pengembalian Peserta Didik,Usulan Tugas Belajar / Ijin Belajar / Diklat / Kursus / Magang / Praktek Kerja di Instansi Lain / Pertukaran antar ASN dengan Pegawai Swasta
+800.1.4.1,Penawaran Pendidikan/ Beasiswa,Usulan Tugas Belajar / Ijin Belajar / Diklat / Kursus / Magang / Praktek Kerja di Instansi Lain / Pertukaran antar ASN dengan Pegawai Swasta
+800.1.4.1.1,Laporan Selesai Pendidikan,Laporan Selesai Pendidikan
+800.1.4.1.1,Laporan Perkembangan Study,Laporan Selesai Pendidikan
+800.1.4.1.2,Laporan Kepemilikan Ijazah,Laporan Kepemilikan Ijazah
+800.1.4.2,Penyesuaian Ijazah/ UPKP,Penyesuaian ijazah
+800.1.4.4,Standar Kinerja Pegawai (SKP) dan Penilaian Prestasi Kerja Pegawai (PPKP),Standar Kinerja Pegawai (SKP) dan Penilaian Prestasi Kerja
+800.1.4.5,Penilaian Angka Kredit (PAK),"Angka Kredit Antara lain: Pengajuan Daftar Usul Pengajuan Angka Kredit, Penilaian Daftar Usul Pengajuan Angka Kredit"
+800.1.4.6,Pencantuman Gelar,"Pencantuman Gelar (Pengusulan, Izin Pencantuman Gelar)"
+800.1.4.7,Izin Luar Negeri (Pengembangan Karier),"Izin Luar Negeri (Permohonan, Pengusulan, Surat Izin Luar Negeri, Laporan Luar Negeri) u pengembangan karir"
+800.1.4.8,Ujian Dinas,"Ujian Dinas (Usul, Penetapan Peserta Ujian, Pelaksanaan Ujian, Pengumuman Hasil Ujian)"
+800.1.5.1,E-kinerja ASN,Hasil Penilaian Kinerja dan Standar Kerja
+800.1.5.4,Pengelolaan Kinerja Pegawai,"Pengelolaan Kinerja Pegawai (Perencanaan, pelaksanaan, pemantauan, pembinaan dan penilaian)"
+800.1.6.1,Kode Etik Pegawai,Kode Etik Pegawai
+800.1.6.2,Disiplin Pegawai,"Disiplin (Pengumpulan data, monitoring dan evaluasi, penjatuhan hukuman disiplin ringan, sedang, berat)"
+800.1.6.3,Pemberhentian Dengan Hormat,Pemberhentian Dengan Hormat
+800.1.6.4,Pemberhentian Dengan Tidak Hormat,Pemberhentian Dengan Tidak Hormat
+800.1.6.5,Pemberhentian Sementara (Disiplin),Pemberhentian Sementara
+800.1.6.6.1,Masa Persiapan Pensiun(MPP)/ Bebas Tugas(BT),Masa Persiapan Pensiun
+800.1.6.6.1,Pembekalan Pensiun,Masa Persiapan Pensiun
+800.1.6.6.2,Pensiun Batas Usia Pensiun (BUP),Batas Usia Pensiun
+800.1.6.6.3,Pensiun Atas Permintaan Sendiri (APS/Dini),Atas Permintaan Sendiri
+800.1.6.6.4,Pensiun Janda/Duda/Anak,Janda/Duda
+800.1.6.7,"Pengaktifan Kembali (dari CLTN, Hukuman Disiplin)","Pengaktifan Kembali (dari CLTN, Hukuman Disiplin)"
+800.1.7,Bantuan Hukum,Bantuan Hukum
+800.1.8.1.1,Ijin/Keterangan untuk Melakukan Perceraian,Ijin/Keterangan untuk Melakukan Perceraian
+800.1.8.1.2,Laporan Perceraian,Laporan Perceraian
+800.1.8.1.3,Pembinaan Perceraian,Pembinaan Perceraian
+800.1.9.1,Simpeg,Pengolah Data dan Informasi Kepegawaian
+800.1.9.5,Pengelolaan Kartu Identitas Pegawai/ID Card,Pengelolaan Kartu Identitas Pegawai/ID Card
+800.1.9.6,Mesin Fingger Print/ Mesin Presensi,Pengelolaan Mesin Presensi Pegawai
+800.1.9.7,Daftar Hadir Pegawai,Daftar Hadir Pegawai
+800.2.2,Penawaran Diklat,Pendidikan dan Pelatihan
+800.2.2,Analisis Kebutuhan Diklat,Pendidikan dan Pelatihan
+800.2.2.1,Sistem Informasi Program dan Pembinaan Diklat,Sistem Informasi Program dan Pembinaan Diklat
+800.2.2.10,Akreditasi (Lembaga dan Program) Diklat,Akreditasi (Lembaga dan Program)
+800.2.2.11,Penjaminan Mutu Diklat,Penjaminan Mutu Diklat
+800.2.2.2,Pedoman-pedoman Kediklatan,Pedoman-pedoman Kediklatan
+800.2.2.3,Kurikulum-kurikulum Diklat,Kurikulum-kurikulum Diklat
+800.2.2.4,Modul-modul Diklat,Modul-modul Diklat
+800.2.2.5,Panduan Fasilitator/ Panduan Diklat,Panduan Fasilitator
+800.2.2.6,Saran/rekomendasi penyelenggaraan diklat,Saran/rekomendasi penyelenggaraan diklat
+800.2.2.7,Notulen sosialisasi/Rapat Koordinasi Kebijakan Diklat,Notulen sosialisasi/Rapat Koordinasi Kebijakan Diklat
+800.2.2.8,Monitoring dan evaluasi program dan pembinaan diklat,Monitoring dan evaluasi program dan pembinaan diklat
+800.2.2.9,"Konsultasi, advokasi, asistensi diklat","Konsultasi, advokasi, asistensi diklat"
+800.2.3.4,Penilaian Widyaiswara,Penilaian Widyaiswara
+800.2.4.1,Peserta Diklat,"Perencanaan; peserta, pengajar, penjadwalan Penyelenggaraan Diklat"
+800.2.4.1,Pengajar/ Narasumber Diklat,"Perencanaan; peserta, pengajar, penjadwalan Penyelenggaraan Diklat"
+800.2.4.1,Jadwal Diklat,"Perencanaan; peserta, pengajar, penjadwalan Penyelenggaraan Diklat"
+800.2.4.2,Laporan Peserta Diklat,"Penyelenggaraan Diklat (Jenis diklat, Laporan peserta, sertifikasi, dll)"
+800.2.4.2,Sertifikat Diklat,"Penyelenggaraan Diklat (Jenis diklat,Laporan peserta, sertifikasi, dll)"
+800.2.4.2,Laporan Diklat,"Penyelenggaraan Diklat (Jenius Diklat, Laporan Peserta, Sertifikasi dll)"
+800.2.4.4,Pengembangan bahan ajar dan metodologi pembelajaran,Pengembangan bahan ajar dan metodologi pembelajaran
+800.2.4.6,Monitoring penyelenggara diklat,Monitoring penyelenggara diklat
+800.2.4.7,Monitoring dan evaluasi pasca diklat,Monitoring dan evaluasi pasca diklat
+800.2.5,Alumni Diklat,Alumni
+900.1.1.1,PPA (KUA//PPAS),"Penyusunan Prioritas Plafon Anggaran (PPA) termasuk Kebijakan Umum Anggaran (KUA), Penetapan Plafon Anggaran Sementara (PPAS)"
+900.1.1.2,RKA SKPD,Penyusunan Rencana Kerja Anggaran Satuan Kerja Perangkat Daerah (RKASKPD)
+900.1.1.4,RAPBD Perubahan,Rencana Anggaran Pendapatan dan Belanja Daerah Perubahan (RAPBD-P)
+900.1.11,Pemeriksaan/Pengawasan Keuangan Daerah,Pemeriksaan/Pengawasan Keuangan Daerah
+900.1.12.1,Anggaran Belanja Tambahan (ABT),Anggaran Daerah
+900.1.13.2,BUMD,"Badan Usaha Milik Daerah Antara lain: fasilitasi serta bimbingan teknis di bidang usaha milik daerah lembaga keuangan, fasilitas serta bimbingan teknis di bidang badan usaha milik daerah lembaga non keuangan,penyiaipan pelaksanaan monitoring dan evaluasi badan usaha milik daerah"
+900.1.13.3,BLUD,"antara lain: analisis, standardisasi teknis, fasilitasi serta bimbingan teknis, pemantauan dan evaluasi di bidang pola pengelolaan keuangan badan layanan umum daerah, Pembinaan pelaksanaan kebijakan, standardisasi teknis, prosedur dan kriteria, fasilitasi serta bimbingan teknis penerapan pola pengelolaan keuangan keuangan badan layanan umum daerah, Penyiapan pelaksanaan monitoring dan evaluasi pola pengelolaan keuangan  badan  layanan  umum daerah"
+900.1.14.1,DAU,"Fasilitasi Dana Alokasi Umum Antara lain: Koordinasi penyiapan data dasar penghitungan, dan rekonsiliasi dana alokasi umum, Sosialisasi dan supervise dana alokasi umum, Penyiapan pelaksanaan monitoring dan evaluasi dana alokasi umum"
+900.1.14.2,DAK,"Fasilitasi Dana Alokasi Khusus Antara lain: Koordinasi penyiapan data dasar, Sosialisasi dan supervisi dana alokasi khusus, penyiapan pelaksanaan monitoring, evaluasi dana alokasi khusus, Penyiapan pelaksanaan monitoring, evaluasi dana alokasi khusus"
+900.1.16,Dana Keistimewaan,Dana Keistimewaan
+900.1.2.3,Rancangan DPA SKPD,Rancangan Dokumen Pelaksanaan Anggaran (RDPA) SKPD yang telah disetujui Sekretaris Daerah
+900.1.2.4,DPA SKPD,"Dokumen Pelaksanaan Anggaran (DPA) SKPD yang telah disahkan oleh Pejabat Pengelola Keuangan Daerah (PPKD), APBD, APBDP, Dokumen Pelaksanaan Pergeseran Anggaran,"
+900.1.3.10,Laporan Keuangan,Laporan Keuangan
+900.1.3.11,SKPP,SKPP
+900.1.3.6,SPJ,Pertanggungjaawban Penggunaan Dana / SPJ
+900.1.3.7,Penggajian/ Daftar Gaji,Daftar Gaji
+900.1.3.9,Data Rekening Bendaharan Umum,Data Rekening Bendahara Umum Daerah (BUD)
+900.1.3.9,Bendahara,Data Rekening Bendahara Umum Daerah (BUD)
+900.1.7.1,Specimen tanda tangan,"Surat Penetapan Pemimpin Proyek/Bagian Proyek, Bendahara, atas Penggunaan Anggaran Kegiatan Pembantuan, termasuk Specimen Tanda Tangan"
+900.1.8.2,Pajak dan Retribusi,"antara lain: fasilitasi pelaksanaan kebijakan standardisasi pajak daerah dan retribusi daerah, penyiapan bahan perumusan bimbingan teknis pajak daerah dan retribusi daerah, penyiapan bahan perumusan analisis dan evaluasi, pemantauan pajak daerah dan retribusi daerah, penyiapan bahan perumusan kebijakan fasilitasi pemberian insentif pajak daerah dan retribusi daerah, sosialisasi, pendataan dan penagihan pajak daerah,pelayanan kesamsatan"

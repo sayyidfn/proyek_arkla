@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.pyo
+
+# Environment
+.env
+.env.local
+.env*.local
+venv/
+.venv/
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+*.egg-info/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+database/
+
+# Uploads (keep folder structure)
+arkla-backend/uploads/*
+!arkla-backend/uploads/.gitkeep
+arkla-backend/output/*
+!arkla-backend/output/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+.pytest_cache/
+
+# Project specific - exclude from repo
+AGENTIC_MCP_v1.0.md
+contoh dokumen asli/
+Diagram Tanpa Judul.drawio
+WhatsApp*.jpeg
+WhatsApp*.jpg
+WhatsApp*.png
+KODE_KLASIFIKASI.csv
+requirements.txt
+# Misc
+*.bak
+*.tmp
