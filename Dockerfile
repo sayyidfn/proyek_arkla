@@ -22,7 +22,6 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 # Copy app
 COPY arkla-backend/app ./app
-COPY arkla-backend/data ./data
 
 # Create directories
 RUN mkdir -p uploads database output
