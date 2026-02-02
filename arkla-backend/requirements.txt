@@ -1,5 +1,5 @@
 # ARKLA Backend Dependencies
-# Generated from MCP v1.0
+# Build version: 2026-02-02-v3 (force rebuild)
 
 fastapi>=0.104.0
 uvicorn>=0.24.0
