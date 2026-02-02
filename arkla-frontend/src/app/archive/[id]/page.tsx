@@ -127,7 +127,8 @@ function SuratDetailContent({ id }: { id: string }) {
           ...rawData,
           ...(rawData.details || {}),
         };
-        delete (flatData as Record<string, unknown>).details;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        delete (flatData as any).details;
 
         console.log("Flattened surat data:", flatData);
         setSurat(flatData);
@@ -186,7 +187,8 @@ function SuratDetailContent({ id }: { id: string }) {
         ...rawData,
         ...(rawData.details || {}),
       };
-      delete (flatData as Record<string, unknown>).details;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      delete (flatData as any).details;
       setSurat(flatData);
     } catch (err) {
       setToast({

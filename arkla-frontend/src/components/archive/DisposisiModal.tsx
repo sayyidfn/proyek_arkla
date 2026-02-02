@@ -41,7 +41,8 @@ export default function DisposisiModal({
           ...rawData,
           ...(rawData.details || {}),
         };
-        delete (flatData as Record<string, unknown>).details;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        delete (flatData as any).details;
 
         setDetail(flatData);
       } catch (err) {
