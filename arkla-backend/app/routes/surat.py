@@ -66,11 +66,13 @@ async def verify_surat(request: VerifyRequest):
             })
             
             # Update main surat table
+            # Reset requires_manual_review to 0 when verified (user has reviewed and confirmed)
             cursor.execute("""
                 UPDATE surat SET
                     nomor_urut_display = ?,
                     kode_arsip = ?,
                     isi_ringkas = ?,
+                    requires_manual_review = 0,
                     verified_at = CURRENT_TIMESTAMP,
                     updated_at = CURRENT_TIMESTAMP
                 WHERE id = ?
