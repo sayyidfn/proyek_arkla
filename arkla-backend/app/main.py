@@ -1,8 +1,10 @@
 import os
 import logging
+import traceback
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 
 from app.core.database import init_database
@@ -24,6 +26,7 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     # Startup
     logger.info("Starting ARKLA Backend...")
+    logger.info(f"Environment: {os.getenv('ENVIRONMENT', 'development')}")
     
     # Create required directories
     os.makedirs("uploads", exist_ok=True)
@@ -31,14 +34,18 @@ async def lifespan(app: FastAPI):
     os.makedirs("database", exist_ok=True)
     
     # Initialize database
-    init_database()
-    logger.info("Database initialized")
+    try:
+        init_database()
+        logger.info("Database initialized successfully")
+    except Exception as e:
+        logger.error(f"Database initialization failed: {e}")
+        raise
     
     # Verify Gemini API key
     if not os.getenv("GOOGLE_API_KEY"):
-        logger.warning("GOOGLE_API_KEY not set! Gemini features will not work.")
+        logger.warning("⚠️ GOOGLE_API_KEY not set! Gemini features will not work.")
     else:
-        logger.info("Gemini API key configured")
+        logger.info("✅ Gemini API key configured")
     
     yield
     
@@ -54,13 +61,30 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# CORS middleware
+
+# Global exception handler
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logger.error(f"Unhandled exception: {exc}\n{traceback.format_exc()}")
+    return JSONResponse(
+        status_code=500,
+        content={
+            "status": "error",
+            "code": "INTERNAL_SERVER_ERROR",
+            "message": "An unexpected error occurred. Please try again.",
+            "detail": str(exc) if os.getenv("ENVIRONMENT") != "production" else None
+        }
+    )
+
+
+# CORS middleware - must be before routers
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure for production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 # Include routers
@@ -75,14 +99,19 @@ async def root():
     return {
         "status": "healthy",
         "service": "ARKLA Backend",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "environment": os.getenv("ENVIRONMENT", "development")
     }
 
 
+@app.get("/health")
 @app.get("/api/v1/health")
 async def health_check():
+    """Health check endpoint for monitoring and load balancers"""
     return {
         "status": "healthy",
         "gemini_configured": bool(os.getenv("GOOGLE_API_KEY")),
-        "database": "connected"
+        "database": "connected",
+        "version": "1.0.0"
     }
+

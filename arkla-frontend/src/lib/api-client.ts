@@ -35,20 +35,29 @@ class APIClient {
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
 
-    const response = await fetch(url, {
-      ...options,
-      headers: {
-        "Content-Type": "application/json",
-        ...options.headers,
-      },
-    });
+    try {
+      const response = await fetch(url, {
+        ...options,
+        headers: {
+          "Content-Type": "application/json",
+          ...options.headers,
+        },
+      });
 
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      throw new Error(error.message || `API Error: ${response.status}`);
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        const errorMessage = error.message || error.detail || `API Error: ${response.status}`;
+        throw new Error(errorMessage);
+      }
+
+      return response.json();
+    } catch (error) {
+      // Handle network errors
+      if (error instanceof TypeError && error.message === "Failed to fetch") {
+        throw new Error("Tidak dapat terhubung ke server. Periksa koneksi internet Anda.");
+      }
+      throw error;
     }
-
-    return response.json();
   }
 
   // ==================== SURAT ====================
@@ -118,9 +127,9 @@ class APIClient {
     formData.append("category_id", kategori);
     formData.append("use_optimized", String(useOptimized));
 
-    // Use AbortController for timeout (120 seconds for OCR processing)
+    // Use AbortController for timeout (180 seconds for OCR processing)
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 120000);
+    const timeoutId = setTimeout(() => controller.abort(), 180000);
 
     try {
       const response = await fetch(`${this.baseUrl}/process-surat`, {
@@ -133,18 +142,36 @@ class APIClient {
 
       if (!response.ok) {
         const error = await response.json().catch(() => ({}));
-        throw new Error(
-          error.detail || error.message || `API Error: ${response.status}`,
-        );
+        const errorMessage = error.detail || error.message || error.code;
+        
+        // Map error codes to user-friendly messages
+        if (error.code === "GEMINI_CONFIG_ERROR") {
+          throw new Error("Server belum dikonfigurasi untuk memproses dokumen. Hubungi administrator.");
+        } else if (error.code === "INVALID_FILE") {
+          throw new Error("Format file tidak didukung. Gunakan PDF, JPG, atau PNG.");
+        } else if (error.code === "FILE_TOO_LARGE") {
+          throw new Error("Ukuran file terlalu besar. Maksimal 10MB.");
+        } else if (error.code === "OCR_FAILED") {
+          throw new Error("Gagal memproses gambar. Pastikan gambar jelas dan tidak rusak.");
+        } else if (response.status === 500) {
+          throw new Error("Terjadi kesalahan server. Coba lagi nanti.");
+        }
+        
+        throw new Error(errorMessage || `Error: ${response.status}`);
       }
 
       return response.json();
     } catch (error) {
       clearTimeout(timeoutId);
-      if (error instanceof Error && error.name === "AbortError") {
-        throw new Error(
-          "Timeout: Proses OCR memakan waktu terlalu lama. Coba lagi.",
-        );
+      if (error instanceof Error) {
+        if (error.name === "AbortError") {
+          throw new Error(
+            "Timeout: Proses OCR memakan waktu terlalu lama. Coba lagi dengan gambar yang lebih kecil.",
+          );
+        }
+        if (error.message === "Failed to fetch") {
+          throw new Error("Tidak dapat terhubung ke server. Periksa koneksi internet Anda.");
+        }
       }
       throw error;
     }
