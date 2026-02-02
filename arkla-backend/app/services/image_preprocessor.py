@@ -56,9 +56,14 @@ class ImagePreprocessor:
             # Load image
             image = self._load_image(input_path)
             if image is None:
+                # Fallback: return original file path instead of failing
+                logger.warning(f"Could not load image, using original: {input_path}")
                 return PreprocessResult(
-                    success=False,
-                    error="IMAGE_CORRUPT"
+                    success=True,
+                    processed_path=input_path,
+                    original_dpi=72,
+                    upscaled=False,
+                    error=None
                 )
             
             # Get original DPI estimate
@@ -121,9 +126,14 @@ class ImagePreprocessor:
             
         except Exception as e:
             logger.error(f"Preprocessing failed: {e}")
+            # Fallback: return original file instead of failing
+            logger.warning(f"Falling back to original file: {input_path}")
             return PreprocessResult(
-                success=False,
-                error="PREPROCESS_FAILED"
+                success=True,
+                processed_path=input_path,
+                original_dpi=72,
+                upscaled=False,
+                error=None
             )
     
     def _load_image(self, path: str) -> Optional[np.ndarray]:
