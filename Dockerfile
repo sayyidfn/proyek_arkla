@@ -2,17 +2,27 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install dependencies
+# Install system dependencies for opencv-headless
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgl1-mesa-glx \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
 COPY arkla-backend/requirements.txt .
 
-# Uninstall opencv-python jika ada, install headless version
+# Install Python dependencies - FORCE headless opencv
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip uninstall -y opencv-python opencv-python-headless 2>/dev/null || true && \
-    pip install --no-cache-dir opencv-python-headless && \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir -r requirements.txt && \
+    pip uninstall -y opencv-python 2>/dev/null || true && \
+    pip install --no-cache-dir --force-reinstall opencv-python-headless
 
 # Copy app
 COPY arkla-backend/app ./app
+COPY arkla-backend/data ./data
 
 # Create directories
 RUN mkdir -p uploads database output
