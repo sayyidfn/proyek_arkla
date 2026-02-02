@@ -123,10 +123,20 @@ function SuratDetailContent({ id }: { id: string }) {
         const rawData = apiResponse.data || apiResponse;
 
         // Flatten data: merge details into root level
-        const flatData: SuratDetail = {
-          ...rawData,
-          ...(rawData.details || {}),
-        };
+        // Important: Don't override non-null root values with null detail values
+        const details = rawData.details || {};
+        const flatData: SuratDetail = { ...rawData };
+        
+        // Merge details but preserve non-null root values (like isi_ringkas from main table)
+        Object.entries(details).forEach(([key, value]) => {
+          // Only override if the detail value is not null/undefined
+          // OR if the root value is null/undefined
+          if (value !== null && value !== undefined) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (flatData as any)[key] = value;
+          }
+        });
+        
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         delete (flatData as any).details;
 
@@ -183,10 +193,17 @@ function SuratDetailContent({ id }: { id: string }) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const apiResponse = response as any;
       const rawData = apiResponse.data || apiResponse;
-      const flatData: SuratDetail = {
-        ...rawData,
-        ...(rawData.details || {}),
-      };
+      
+      // Flatten data: merge details but preserve non-null root values
+      const details = rawData.details || {};
+      const flatData: SuratDetail = { ...rawData };
+      
+      Object.entries(details).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (flatData as any)[key] = value;
+        }
+      });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       delete (flatData as any).details;
       setSurat(flatData);
