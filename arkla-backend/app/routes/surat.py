@@ -20,7 +20,11 @@ async def verify_surat(request: VerifyRequest):
     extracted_data = request.extracted_data
     kode_arsip = request.kode_arsip
     
-    logger.info(f"Verifying surat", extra={"surat_id": surat_id})
+    logger.info(f"Verifying surat", extra={
+        "surat_id": surat_id,
+        "extracted_data_keys": list(extracted_data.keys()) if extracted_data else [],
+        "isi_ringkas_value": extracted_data.get('isi_ringkas') if extracted_data else None
+    })
     
     try:
         with get_db() as conn:
