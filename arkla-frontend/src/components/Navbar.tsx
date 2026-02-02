@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSidebar } from "@/lib/sidebar-context";
@@ -12,13 +12,18 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ title, subtitle }) => {
   const { toggle } = useSidebar();
+  const [today, setToday] = useState<string>("");
 
-  // Format tanggal hari ini
-  const today = new Date().toLocaleDateString("id-ID", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  // Format tanggal hari ini - only on client side to avoid hydration mismatch
+  useEffect(() => {
+    setToday(
+      new Date().toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    );
+  }, []);
 
   return (
     <header className="flex h-14 md:h-16 items-center justify-between border-b border-gray-200 bg-white px-4 md:px-6">
