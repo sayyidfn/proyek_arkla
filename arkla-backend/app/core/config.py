@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     google_api_key: Optional[str] = None
     
     # Gemini Configuration
-    gemini_model: str = "gemini-2-flash"
+    gemini_model: str = "gemini-2.0-flash"  # Fixed: was "gemini-2-flash" (invalid)
     gemini_ocr_enabled: bool = True
     gemini_summarization_enabled: bool = True
     gemini_auto_fill_enabled: bool = True

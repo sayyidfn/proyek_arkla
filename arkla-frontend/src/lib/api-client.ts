@@ -116,7 +116,7 @@ class APIClient {
     file: File,
     kategori: KategoriSurat,
     useOptimized: boolean = true,
-    skipPreprocessing: boolean = false,  // Enable preprocessing by default for better OCR quality
+    skipPreprocessing: boolean = false, // Enable preprocessing by default for better OCR quality
   ): Promise<ProcessSuratResponse> {
     const formData = new FormData();
     formData.append("file", file);

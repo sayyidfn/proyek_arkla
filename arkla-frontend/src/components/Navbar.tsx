@@ -21,7 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({ title, subtitle }) => {
         day: "numeric",
         month: "long",
         year: "numeric",
-      })
+      }),
     );
   }, []);
 
