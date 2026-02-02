@@ -9,8 +9,18 @@ import {
   DashboardStats,
 } from "./types";
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
+// Build API base URL - ensure /api/v1 is always appended
+const getApiBaseUrl = (): string => {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!envUrl) {
+    return "http://localhost:8000/api/v1";
+  }
+  // Remove trailing slash if present, then ensure /api/v1 suffix
+  const cleanUrl = envUrl.replace(/\/+$/, "");
+  return cleanUrl.endsWith("/api/v1") ? cleanUrl : `${cleanUrl}/api/v1`;
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 class APIClient {
   private baseUrl: string;
