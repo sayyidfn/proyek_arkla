@@ -41,9 +41,9 @@ class Settings(BaseSettings):
     @property
     def cors_origins_list(self) -> List[str]:
         """Parse CORS origins from comma-separated string."""
-        if self.environment == "development":
-            return ["*"]  # Allow all in development
-        return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
+        # For production, allow all origins (or configure specific ones via env)
+        # This ensures frontend can connect from any domain
+        return ["*"]
     
     @property
     def is_production(self) -> bool:

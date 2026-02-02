@@ -1,0 +1,54 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+*.egg
+.mypy_cache/
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Frontend (not needed for backend deployment)
+arkla-frontend/
+node_modules/
+
+# Documentation
+*.md
+*.drawio
+docs/
+
+# Local database and uploads (recreated at runtime)
+arkla-backend/database/
+arkla-backend/uploads/
+arkla-backend/output/
+
+# Test files
+tests/
+test_*.py
+*_test.py
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
