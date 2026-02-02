@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
-# Copy requirements first (for Docker layer caching)
+# Copy requirements first (for Docker layer caching
 COPY arkla-backend/requirements.txt .
 
 # Install Python dependencies
