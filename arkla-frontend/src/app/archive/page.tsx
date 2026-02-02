@@ -185,7 +185,11 @@ function ArchiveContent() {
       if (dateTo) params.set("date_to", dateTo);
       params.set("format", "xlsx");
 
-      const url = `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1"}/export?${params.toString()}`;
+      // Use API client's base URL for consistency
+      const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL 
+        ? `${process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, "")}/api/v1`
+        : "https://sheer-gussi-proyrk-arkla-b4f4b3ae.koyeb.app/api/v1";
+      const url = `${apiBaseUrl}/export?${params.toString()}`;
       window.open(url, "_blank");
 
       setToast({
