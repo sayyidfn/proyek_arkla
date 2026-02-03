@@ -13,29 +13,32 @@
 
 ## 🎯 Fitur Utama
 
-| Fitur | Deskripsi |
-|-------|-----------|
-| 📄 **OCR & AI Extraction** | Upload PDF/JPG/PNG, ekstrak data otomatis dengan Gemini AI |
-| 📁 **6 Kategori Surat** | Masuk Biasa, Undangan, Masuk Penting, Keluar, Keluar Sekwan, Rahasia |
-| 🔍 **Pencarian & Filter** | Cari berdasarkan kategori, tanggal, kode arsip, atau isi ringkas |
-| 📊 **Dashboard Statistik** | Monitor total arsip, pending review, tingkat akurasi AI |
-| 📥 **Export Data** | Export ke Excel/CSV dengan format standar DPRD |
-| 🖨️ **Lembar Disposisi** | Generate dan cetak lembar disposisi format A5 |
+| Fitur                      | Deskripsi                                                            |
+| -------------------------- | -------------------------------------------------------------------- |
+| 📄 **OCR & AI Extraction** | Upload PDF/JPG/PNG, ekstrak data otomatis dengan Gemini AI           |
+| 📁 **6 Kategori Surat**    | Masuk Biasa, Undangan, Masuk Penting, Keluar, Keluar Sekwan, Rahasia |
+| 🔍 **Pencarian & Filter**  | Cari berdasarkan kategori, tanggal, kode arsip, atau isi ringkas     |
+| 📊 **Dashboard Statistik** | Monitor total arsip, pending review, tingkat akurasi AI              |
+| 📥 **Export Data**         | Export ke Excel/CSV dengan format standar DPRD                       |
+| 🖨️ **Lembar Disposisi**    | Generate dan cetak lembar disposisi format A5                        |
 
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+ (untuk frontend)
 - Python 3.12+ (untuk backend)
 - Google Gemini API Key
 
 ### 1. Clone Repository
+
 ```bash
 git clone https://github.com/sayyidfn/proyek_arkla.git
 cd proyek_arkla
 ```
 
 ### 2. Setup Backend
+
 ```bash
 cd arkla-backend
 python -m venv venv
@@ -47,7 +50,9 @@ pip install -r requirements.txt
 ```
 
 ### 3. Environment Variables
+
 Buat file `.env` di folder `arkla-backend/`:
+
 ```env
 GOOGLE_API_KEY=your_gemini_api_key_here
 GEMINI_MODEL=gemini-2.5-flash
@@ -56,12 +61,14 @@ ENVIRONMENT=development
 ```
 
 ### 4. Jalankan Backend
+
 ```bash
 python run.py
 # Server berjalan di http://localhost:8000
 ```
 
 ### 5. Setup Frontend
+
 ```bash
 cd ../arkla-frontend
 npm install
@@ -72,17 +79,20 @@ npm run dev
 ## 🛠️ Tech Stack
 
 **Backend:**
+
 - FastAPI (Python 3.12)
 - SQLite Database
 - Google Gemini API
 - OpenCV & Pillow
 
 **Frontend:**
+
 - Next.js 15 + TypeScript
 - Tailwind CSS
 - React 19
 
 **Deployment:**
+
 - Backend: Hugging Face Spaces
 - Frontend: Vercel
 
@@ -92,7 +102,7 @@ npm run dev
 arkla-backend/
 ├── app/
 │   ├── core/          # Configuration & database
-│   ├── models/        # Pydantic schemas  
+│   ├── models/        # Pydantic schemas
 │   ├── routes/        # API endpoints
 │   ├── services/      # Business logic
 │   └── main.py        # FastAPI app
@@ -114,6 +124,7 @@ arkla-frontend/
 ### Environment Variables
 
 **Backend (`.env`):**
+
 ```env
 # Google Gemini
 GOOGLE_API_KEY=your_api_key
@@ -133,6 +144,7 @@ CORS_ORIGINS=http://localhost:3000,http://localhost:5173
 ```
 
 **Frontend (`.env.local`):**
+
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
 ```
@@ -140,6 +152,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
 ## 📚 API Endpoints
 
 **Core Endpoints:**
+
 - `POST /api/v1/process-surat` - Upload & proses dokumen
 - `POST /api/v1/verify` - Verifikasi & simpan data
 - `GET /api/v1/surat` - List semua surat
@@ -151,6 +164,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
 ## 🔄 Development Workflow
 
 ### 1. Menambah Fitur Baru
+
 ```bash
 # Buat branch baru
 git checkout -b feature/nama-fitur
@@ -167,9 +181,11 @@ git push origin feature/nama-fitur
 ### 2. Deployment
 
 **Backend ke Hugging Face Spaces:**
+
 - Push ke GitHub (auto-deploy)
 
 **Frontend ke Vercel:**
+
 - Push ke GitHub (auto-deploy)
 
 ## 🐛 Troubleshooting
@@ -177,6 +193,7 @@ git push origin feature/nama-fitur
 ### Backend Issues
 
 **"GOOGLE_API_KEY not configured"**
+
 ```bash
 # Set environment variable
 export GOOGLE_API_KEY="your_api_key"
@@ -184,12 +201,14 @@ export GOOGLE_API_KEY="your_api_key"
 ```
 
 **"Module not found"**
+
 ```bash
 # Install dependencies
 pip install -r requirements.txt
 ```
 
 **Database error**
+
 ```bash
 # Reset database
 rm database/arkla.db
@@ -199,10 +218,12 @@ python -c "from app.core.database import init_database; init_database()"
 ### Frontend Issues
 
 **API connection error**
+
 - Cek backend berjalan di port 8000
 - Cek `NEXT_PUBLIC_API_URL` di `.env.local`
 
 **Build error**
+
 ```bash
 # Clean install
 rm -rf node_modules package-lock.json
@@ -220,30 +241,32 @@ MIT License - lihat [LICENSE](LICENSE) untuk detail.
 ---
 
 **💡 Tips:**
+
 - Gunakan gambar berkualitas tinggi untuk OCR lebih akurat
-- Kategorikan surat dengan benar untuk data yang terstruktur  
+- Kategorikan surat dengan benar untuk data yang terstruktur
 - Lakukan verifikasi manual untuk data penting
 - Export data secara berkala sebagai backup
 
 **📞 Support:**
 Jika ada masalah atau pertanyaan, buat [issue di GitHub](https://github.com/sayyidfn/proyek_arkla/issues).
-│   │   ├── routes/          # API endpoints
-│   │   └── services/        # Business logic (Gemini, OCR)
-│   ├── database/            # SQLite database
-│   ├── uploads/             # Uploaded files
-│   └── requirements.txt
+│ │ ├── routes/ # API endpoints
+│ │ └── services/ # Business logic (Gemini, OCR)
+│ ├── database/ # SQLite database
+│ ├── uploads/ # Uploaded files
+│ └── requirements.txt
 │
-├── arkla-frontend/          # Next.js Frontend
-│   ├── src/
-│   │   ├── app/             # Pages (App Router)
-│   │   ├── components/      # React components
-│   │   └── lib/             # API client, types, utils
-│   └── package.json
+├── arkla-frontend/ # Next.js Frontend
+│ ├── src/
+│ │ ├── app/ # Pages (App Router)
+│ │ ├── components/ # React components
+│ │ └── lib/ # API client, types, utils
+│ └── package.json
 │
-├── Dockerfile               # Production Docker config
+├── Dockerfile # Production Docker config
 ├── .dockerignore
 └── README.md
-```
+
+````
 
 ## 🚀 Quick Start
 
@@ -258,7 +281,7 @@ Jika ada masalah atau pertanyaan, buat [issue di GitHub](https://github.com/sayy
 ```bash
 git clone https://github.com/sayyidfn/proyek_arkla.git
 cd proyek_arkla
-```
+````
 
 ### 2. Setup Backend
 

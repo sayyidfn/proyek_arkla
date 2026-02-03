@@ -101,7 +101,8 @@ export default function DisposisiModal({
           <title>Lembar Disposisi - ${surat.nomor_urut_display || surat.id}</title>
           <style>
             @page {
-              size: 102mm 157mm;
+              /*size: 102mm 157mm;*/
+              size: A4 portrait;
               margin: 14mm 11mm 3mm 7mm;
             }
             * {
@@ -115,6 +116,8 @@ export default function DisposisiModal({
             }
             .container {
               /* Tidak ada border luar */
+              width: 102mm;
+              height: 157mm;
             }
             /* Header LEMBAR DISPOSISI */
             .header {

@@ -16,10 +16,12 @@ Modern React aplikasi untuk sistem arsip DPRD Sleman dengan UI yang responsif.
 ## 🔧 Setup Development
 
 ### Prerequisites
+
 - Node.js 18+
 - NPM atau Yarn
 
 ### Installation
+
 ```bash
 # Clone & setup
 git clone https://github.com/sayyidfn/proyek_arkla.git
@@ -36,6 +38,7 @@ cp .env.local.example .env.local
 ```
 
 ### Environment Variables
+
 ```env
 # Backend API
 NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
@@ -47,6 +50,7 @@ NEXT_PUBLIC_BASE_URL=http://localhost:8000
 ```
 
 ### Development Server
+
 ```bash
 npm run dev
 # atau
@@ -54,6 +58,7 @@ yarn dev
 ```
 
 Aplikasi akan tersedia di:
+
 - **Local**: http://localhost:3000
 - **Production**: https://proyekarkla.vercel.app
 
@@ -107,33 +112,38 @@ src/
 ## 🚀 Fitur Utama
 
 ### 1. Upload Dokumen
+
 **Halaman**: `/upload`
+
 ```typescript
 // Support multiple file formats
-const supportedFormats = ['.pdf', '.jpg', '.jpeg', '.png'];
+const supportedFormats = [".pdf", ".jpg", ".jpeg", ".png"];
 
 // Upload dengan validasi
 const uploadDocument = async (file: File, category: string) => {
   const formData = new FormData();
-  formData.append('file', file);
-  formData.append('category_id', category);
-  
-  const response = await fetch('/api/v1/process-surat', {
-    method: 'POST',
-    body: formData
+  formData.append("file", file);
+  formData.append("category_id", category);
+
+  const response = await fetch("/api/v1/process-surat", {
+    method: "POST",
+    body: formData,
   });
-  
+
   return response.json();
 };
 ```
 
 **Komponen Utama**:
+
 - `FileDropzone` - Drag & drop upload
 - `ValidationForm` - Verifikasi hasil OCR
 - `ProcessingStatus` - Real-time status
 
 ### 2. Archive Management
+
 **Halaman**: `/archive` dan `/archive/[id]`
+
 ```typescript
 // List arsip dengan filter
 const getArchiveList = async (filters: {
@@ -154,44 +164,49 @@ const getArchiveDetail = async (id: string) => {
 ```
 
 **Komponen Utama**:
+
 - `ArchiveCard` - Card list view
 - `ArchiveDetail` - Detail view dengan editing
 - `CategoryFilter` - Filter by kategori
 - `SearchBar` - Text search
 
 ### 3. Export & Laporan
+
 **Halaman**: `/export`
+
 ```typescript
 // Export data
 const exportData = async (params: {
   kategori?: string;
   date_from?: string;
   date_to?: string;
-  format: 'xlsx' | 'csv';
+  format: "xlsx" | "csv";
 }) => {
-  const response = await fetch('/api/v1/export', {
-    method: 'POST',
-    body: JSON.stringify(params)
+  const response = await fetch("/api/v1/export", {
+    method: "POST",
+    body: JSON.stringify(params),
   });
-  
+
   const blob = await response.blob();
   downloadFile(blob, `arsip_${new Date().toISOString()}.${params.format}`);
 };
 ```
 
 **Komponen Utama**:
+
 - `ExportForm` - Form parameter export
 - `ExportHistory` - Riwayat export sebelumnya
 
 ## 🎨 UI Components
 
 ### Layout Components
+
 ```typescript
 // Header dengan navigasi
 <Header currentPage="archive" />
 
 // Modal untuk confirmasi
-<Modal 
+<Modal
   isOpen={showConfirm}
   title="Konfirmasi Hapus"
   onConfirm={handleDelete}
@@ -207,6 +222,7 @@ const exportData = async (params: {
 ```
 
 ### Form Components
+
 ```typescript
 // File upload dengan validasi
 <FileDropzone
@@ -224,6 +240,7 @@ const exportData = async (params: {
 ```
 
 ### Data Components
+
 ```typescript
 // Archive card dengan actions
 <ArchiveCard
@@ -246,6 +263,7 @@ const exportData = async (params: {
 ## 🎯 State Management
 
 ### Custom Hooks
+
 ```typescript
 // useArchive - Archive management
 const {
@@ -254,28 +272,18 @@ const {
   error,
   fetchArchives,
   deleteArchive,
-  updateArchive
+  updateArchive,
 } = useArchive();
 
 // useUpload - File upload & processing
-const {
-  uploadFile,
-  processing,
-  progress,
-  result,
-  error
-} = useUpload();
+const { uploadFile, processing, progress, result, error } = useUpload();
 
 // useExport - Data export
-const {
-  exportData,
-  exporting,
-  downloadHistory,
-  clearHistory
-} = useExport();
+const { exportData, exporting, downloadHistory, clearHistory } = useExport();
 ```
 
 ### Local State Patterns
+
 ```typescript
 // Form state dengan validation
 const [formData, setFormData] = useState<SuratData>({});
@@ -291,74 +299,76 @@ const [selectedItems, setSelectedItems] = useState<string[]>([]);
 ## 🔧 API Integration
 
 ### API Client Setup
+
 ```typescript
 // lib/api.ts
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 export const api = {
   // Upload methods
-  uploadDocument: (file: File, category: string) => 
+  uploadDocument: (file: File, category: string) =>
     fetch(`${API_BASE}/process-surat`, {
-      method: 'POST',
-      body: createFormData({ file, category_id: category })
+      method: "POST",
+      body: createFormData({ file, category_id: category }),
     }),
 
   // Archive methods
   getArchives: (params?: ArchiveFilters) =>
     fetch(`${API_BASE}/surat?${new URLSearchParams(params)}`),
 
-  getArchiveDetail: (id: string) =>
-    fetch(`${API_BASE}/surat/${id}`),
+  getArchiveDetail: (id: string) => fetch(`${API_BASE}/surat/${id}`),
 
   // Export methods
   exportData: (params: ExportParams) =>
     fetch(`${API_BASE}/export`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(params)
-    })
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(params),
+    }),
 };
 ```
 
 ### Error Handling
+
 ```typescript
 // Global error handler
 const handleApiError = (error: unknown) => {
   if (error instanceof Response) {
     switch (error.status) {
       case 400:
-        return 'Data yang dikirim tidak valid';
+        return "Data yang dikirim tidak valid";
       case 404:
-        return 'Data tidak ditemukan';
+        return "Data tidak ditemukan";
       case 422:
-        return 'OCR gagal memproses dokumen';
+        return "OCR gagal memproses dokumen";
       case 500:
-        return 'Terjadi kesalahan server';
+        return "Terjadi kesalahan server";
       default:
-        return 'Terjadi kesalahan tidak dikenal';
+        return "Terjadi kesalahan tidak dikenal";
     }
   }
-  return 'Koneksi ke server bermasalah';
+  return "Koneksi ke server bermasalah";
 };
 ```
 
 ## 📱 Responsive Design
 
 ### Tailwind Breakpoints
+
 ```css
 /* Mobile First Approach */
 .container {
   @apply px-4;
-  
+
   /* sm: 640px */
   @apply sm:px-6;
-  
+
   /* md: 768px */
   @apply md:px-8;
-  
+
   /* lg: 1024px */
   @apply lg:px-12;
-  
+
   /* xl: 1280px */
   @apply xl:max-w-6xl xl:mx-auto;
 }
@@ -373,11 +383,12 @@ const handleApiError = (error: unknown) => {
 ```
 
 ### Mobile Navigation
+
 ```typescript
 // Responsive header dengan mobile menu
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+
   return (
     <header className="bg-white shadow-sm">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -385,9 +396,9 @@ const Header = () => {
         <div className="hidden md:flex md:space-x-8">
           <NavLinks />
         </div>
-        
+
         {/* Mobile menu button */}
-        <button 
+        <button
           className="md:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
@@ -402,6 +413,7 @@ const Header = () => {
 ## 🚀 Performance Optimization
 
 ### Code Splitting
+
 ```typescript
 // Dynamic imports untuk lazy loading
 const ArchiveDetail = dynamic(() => import('@/components/archive/ArchiveDetail'), {
@@ -415,6 +427,7 @@ const ExportForm = dynamic(() => import('@/components/export/ExportForm'), {
 ```
 
 ### Image Optimization
+
 ```typescript
 // Next.js Image component
 import Image from 'next/image';
@@ -431,13 +444,14 @@ import Image from 'next/image';
 ```
 
 ### Caching Strategy
+
 ```typescript
 // API response caching
 const useSWR = (key: string, fetcher: () => Promise<any>) => {
   return useSWRHook(key, fetcher, {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
-    dedupingInterval: 5000
+    dedupingInterval: 5000,
   });
 };
 ```
@@ -445,6 +459,7 @@ const useSWR = (key: string, fetcher: () => Promise<any>) => {
 ## 🧪 Testing
 
 ### Component Testing
+
 ```bash
 # Run tests
 npm run test
@@ -457,6 +472,7 @@ npm run test:coverage
 ```
 
 ### Manual Testing Checklist
+
 - [ ] Upload berbagai format file (PDF, JPG, PNG)
 - [ ] Filter dan search di halaman archive
 - [ ] Edit dan update data arsip
@@ -467,6 +483,7 @@ npm run test:coverage
 ## 🚀 Deployment
 
 ### Vercel (Production)
+
 ```bash
 # Deploy ke Vercel
 vercel --prod
@@ -477,6 +494,7 @@ vercel --prod
 ```
 
 ### Build & Export
+
 ```bash
 # Production build
 npm run build
