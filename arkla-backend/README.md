@@ -5,10 +5,12 @@ RESTful API untuk sistem arsip DPRD Sleman dengan integrasi Google Gemini AI.
 ## 🔧 Setup Development
 
 ### Requirements
+
 - Python 3.12+
 - Google Gemini API Key
 
 ### Installation
+
 ```bash
 # Clone & setup
 git clone https://github.com/sayyidfn/proyek_arkla.git
@@ -28,6 +30,7 @@ cp .env.example .env
 ```
 
 ### Environment Variables
+
 ```env
 # Google Gemini
 GOOGLE_API_KEY=your_api_key_here
@@ -47,6 +50,7 @@ CORS_ORIGINS=http://localhost:3000,http://localhost:5173
 ```
 
 ### Run Development Server
+
 ```bash
 python run.py
 # atau
@@ -54,6 +58,7 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 API akan tersedia di:
+
 - **Local**: http://localhost:8000
 - **Docs**: http://localhost:8000/docs
 - **Health**: http://localhost:8000/api/v1/health
@@ -86,6 +91,7 @@ app/
 ## 🚀 API Endpoints
 
 ### Core Processing
+
 ```http
 POST /api/v1/process-surat
 Content-Type: multipart/form-data
@@ -97,6 +103,7 @@ skip_preprocessing: boolean (default: false)
 ```
 
 ### CRUD Operations
+
 ```http
 # List surat with filters
 GET /api/v1/surat?kategori=undangan&page=1&limit=20
@@ -117,6 +124,7 @@ DELETE /api/v1/surat/{surat_id}
 ```
 
 ### Export & Reports
+
 ```http
 # Export to Excel/CSV
 POST /api/v1/export
@@ -132,6 +140,7 @@ GET /api/v1/download/{filename}
 ```
 
 ### Utilities
+
 ```http
 # Health check
 GET /api/v1/health
@@ -143,6 +152,7 @@ GET /api/v1/preview-disposisi/{surat_id}
 ## 🗄️ Database Schema
 
 ### Primary Tables
+
 ```sql
 -- Main surat table
 CREATE TABLE surat (
@@ -174,12 +184,14 @@ CREATE TABLE surat_masuk_biasa (
 ## 🤖 AI Processing Pipeline
 
 ### 1. OCR Extraction (Gemini Vision)
+
 ```python
 # Extract text from document images
 result = gemini_engine.extract_text(image_path)
 ```
 
 ### 2. Data Extraction (Gemini)
+
 ```python
 # Extract structured fields
 fields = gemini_engine.extract_fields(
@@ -189,6 +201,7 @@ fields = gemini_engine.extract_fields(
 ```
 
 ### 3. Text Summarization (Gemini)
+
 ```python
 # Generate summary
 summary = gemini_engine.summarize_text(
@@ -198,6 +211,7 @@ summary = gemini_engine.summarize_text(
 ```
 
 ### 4. Confidence Scoring
+
 ```python
 # Calculate field confidence
 confidence = {
@@ -213,12 +227,15 @@ confidence = {
 ## 🔒 Security
 
 ### Authentication
+
 Saat ini menggunakan CORS untuk security. Production deployment memerlukan:
+
 - API Key authentication
 - Rate limiting
 - Request validation
 
 ### Data Protection
+
 - SQL injection prevention (parameterized queries)
 - File type validation
 - File size limits (50MB max)
@@ -227,6 +244,7 @@ Saat ini menggunakan CORS untuk security. Production deployment memerlukan:
 ## 📊 Monitoring & Logging
 
 ### Logging Levels
+
 ```python
 # Production logging
 logging.basicConfig(
@@ -242,6 +260,7 @@ logging.basicConfig(
 ```
 
 ### Health Monitoring
+
 ```http
 GET /api/v1/health
 {
@@ -256,6 +275,7 @@ GET /api/v1/health
 ## 🚀 Deployment
 
 ### Hugging Face Spaces (Production)
+
 ```dockerfile
 # Dockerfile.hf
 FROM python:3.12-slim
@@ -268,6 +288,7 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7860"]
 ```
 
 ### Environment Setup
+
 ```bash
 # Production environment variables
 GOOGLE_API_KEY=prod_api_key
@@ -278,6 +299,7 @@ DEBUG=false
 ## 🧪 Testing
 
 ### Manual Testing
+
 ```bash
 # Test health endpoint
 curl http://localhost:8000/api/v1/health
@@ -290,7 +312,9 @@ curl -X POST \
 ```
 
 ### Error Handling
+
 API menggunakan standar HTTP status codes:
+
 - `200` - Success
 - `400` - Bad Request (invalid input)
 - `404` - Not Found
