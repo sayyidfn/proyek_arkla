@@ -10,7 +10,7 @@ import logging
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
-from fastapi import Cookie, Depends, HTTPException, status
+from fastapi import Cookie, Depends, Header, HTTPException, status
 from jose import JWTError, jwt
 import bcrypt
 
@@ -88,9 +88,11 @@ def decode_access_token(token: str) -> Optional[dict]:
 
 async def get_current_user(
     arkla_token: Optional[str] = Cookie(default=None),
+    authorization: Optional[str] = Header(default=None),
 ) -> dict:
     """
-    FastAPI dependency — Membaca JWT dari HttpOnly cookie 'arkla_token'.
+    FastAPI dependency — Membaca JWT dari HttpOnly cookie 'arkla_token'
+    atau dari header 'Authorization: Bearer <token>' (untuk cross-origin support).
 
     Digunakan di endpoint yang membutuhkan autentikasi (khususnya endpoint
     auth baru seperti /me, /logout, /register).
@@ -111,10 +113,17 @@ async def get_current_user(
         },
     )
 
-    if not arkla_token:
+    token = arkla_token
+    
+    # Cross-origin fallback: Baca token dari Authorization header jika cookie kosong
+    if not token and authorization:
+        if authorization.startswith("Bearer "):
+            token = authorization.split(" ")[1]
+
+    if not token:
         raise credentials_exception
 
-    payload = decode_access_token(arkla_token)
+    payload = decode_access_token(token)
     if payload is None:
         raise credentials_exception
 

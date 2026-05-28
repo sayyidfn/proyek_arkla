@@ -30,17 +30,34 @@ class APIClient {
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
 
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+      ...(options.headers as Record<string, string>),
+    };
+
+    // Auto-inject Bearer Token if present in localStorage (crucial for cross-origin deployments)
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("arkla_access_token");
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      }
+    }
+
     try {
       const response = await fetch(url, {
         credentials: "include", // Tambahan penting untuk cookie HttpOnly
         ...options,
-        headers: {
-          "Content-Type": "application/json",
-          ...options.headers,
-        },
+        headers,
       });
 
       if (response.status === 401) {
+        // Clear tokens and cookies on 401
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("arkla_access_token");
+          document.cookie = "arkla_logged_in=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
+          document.cookie = "arkla_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
+        }
+
         // Abaikan redirect 401 jika user sedang mengakses endpoint login/me
         const isAuthEndpoint = endpoint.includes("/auth/login") || endpoint.includes("/auth/me");
         if (!isAuthEndpoint && typeof window !== "undefined") {
@@ -357,16 +374,27 @@ class APIClient {
    * Login user
    */
   async login(data: LoginRequest): Promise<LoginResponse> {
-    return this.request<LoginResponse>("/auth/login", {
+    const response = await this.request<LoginResponse>("/auth/login", {
       method: "POST",
       body: JSON.stringify(data),
     });
+    
+    if (response.status === "success" && response.access_token) {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("arkla_access_token", response.access_token);
+      }
+    }
+    
+    return response;
   }
 
   /**
    * Logout user
    */
   async logout(): Promise<LogoutResponse> {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("arkla_access_token");
+    }
     return this.request<LogoutResponse>("/auth/logout", {
       method: "POST",
     });

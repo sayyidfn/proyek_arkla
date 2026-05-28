@@ -118,6 +118,7 @@ async def login(login_data: LoginRequest, response: Response):
         status="success",
         message="Login berhasil",
         user=user_response,
+        access_token=token,
     )
 
 

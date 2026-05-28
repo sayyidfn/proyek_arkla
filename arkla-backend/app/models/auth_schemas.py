@@ -96,6 +96,7 @@ class LoginResponse(BaseModel):
     status: str = "success"
     message: str = "Login berhasil"
     user: UserResponse
+    access_token: Optional[str] = None
 
 
 class RegisterResponse(BaseModel):

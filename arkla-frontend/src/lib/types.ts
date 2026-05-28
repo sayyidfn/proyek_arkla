@@ -195,6 +195,7 @@ export interface LoginResponse {
   status: "success" | "error";
   message: string;
   user: AuthUser;
+  access_token?: string;
 }
 
 export interface RegisterRequest {
