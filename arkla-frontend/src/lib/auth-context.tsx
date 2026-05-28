@@ -31,16 +31,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const response = await apiClient.getMe();
       if (response.status === "success" && response.user) {
         setUser(response.user);
+        // Sync role cookie so middleware can guard /register correctly
+        if (typeof window !== "undefined") {
+          document.cookie = `arkla_role=${response.user.role}; path=/; SameSite=Lax; Secure`;
+        }
       } else {
         setUser(null);
         if (typeof window !== "undefined") {
           document.cookie = "arkla_logged_in=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
+          document.cookie = "arkla_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
         }
       }
     } catch (error) {
       setUser(null);
       if (typeof window !== "undefined") {
         document.cookie = "arkla_logged_in=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
+        document.cookie = "arkla_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
       }
     } finally {
       setIsLoading(false);
@@ -59,10 +65,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const response = await apiClient.login(data);
       if (response.status === "success" && response.user) {
         setUser(response.user);
-        // Set client-side cookie for Next.js middleware cross-origin guarding
+        // Set both cookies so Next.js middleware can guard routes correctly
         if (typeof window !== "undefined") {
           const maxAge = data.remember_me ? 7 * 24 * 3600 : 8 * 3600;
           document.cookie = `arkla_logged_in=true; path=/; max-age=${maxAge}; SameSite=Lax; Secure`;
+          document.cookie = `arkla_role=${response.user.role}; path=/; max-age=${maxAge}; SameSite=Lax; Secure`;
         }
       } else {
         throw new Error(response.message || "Gagal masuk. Silakan coba lagi.");
@@ -85,9 +92,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } finally {
       setUser(null);
       setIsLoading(false);
-      // Clear client-side cookie and redirect
+      // Clear both cookies and redirect
       if (typeof window !== "undefined") {
         document.cookie = "arkla_logged_in=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
+        document.cookie = "arkla_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
         window.location.href = "/login";
       }
     }
