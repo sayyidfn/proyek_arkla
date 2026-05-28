@@ -15,7 +15,8 @@ from dotenv import load_dotenv
 
 from app.core.database import init_database
 from app.core.config import settings
-from app.routes import process, surat, export, master_data
+from app.core.auth import seed_default_admin
+from app.routes import process, surat, export, master_data, auth
 
 # Load environment variables
 load_dotenv()
@@ -46,6 +47,9 @@ async def lifespan(app: FastAPI):
     try:
         init_database()
         logger.info("✅ Database initialized successfully")
+        
+        # Seed default admin
+        seed_default_admin()
     except Exception as e:
         logger.error(f"❌ Database initialization failed: {e}")
         raise
@@ -97,10 +101,10 @@ async def global_exception_handler(request: Request, exc: Exception):
 # GZip compression for responses > 500 bytes
 app.add_middleware(GZipMiddleware, minimum_size=500)
 
-# CORS - Allow all origins for flexibility
+# CORS - Allow specific origins for cookie-based authentication
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.cors_origins_list,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -108,6 +112,7 @@ app.add_middleware(
 )
 
 # Include routers
+app.include_router(auth.router, prefix="/api/v1")
 app.include_router(process.router, prefix="/api/v1", tags=["Process"])
 app.include_router(surat.router, prefix="/api/v1", tags=["Surat"])
 app.include_router(export.router, prefix="/api/v1", tags=["Export"])

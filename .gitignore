@@ -60,3 +60,6 @@ requirements.txt
 # Misc
 *.bak
 *.tmp
+
+# pengecualian untuk auth_PRD_AND_RULES.md
+!AUTH_PRD_AND_RULES.md

@@ -228,6 +228,25 @@ def init_database():
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_surat_created_at ON surat(created_at)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_audit_surat_id ON audit_log(surat_id)")
         
+        # ── TABEL BARU: users (autentikasi) ─────────────────────────────────
+        # Ditambahkan secara ADDITIVE — tidak mengubah tabel lama sama sekali.
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id           TEXT PRIMARY KEY,                        -- UUID v4
+                username     TEXT UNIQUE NOT NULL,                    -- login identifier
+                nama         TEXT NOT NULL,                           -- nama lengkap
+                password_hash TEXT NOT NULL,                          -- bcrypt hash
+                role         TEXT NOT NULL DEFAULT 'operator',        -- 'admin' | 'operator'
+                is_active    INTEGER NOT NULL DEFAULT 1,              -- 1=aktif, 0=nonaktif
+                created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        cursor.execute(
+            "CREATE INDEX IF NOT EXISTS idx_users_username ON users(username)"
+        )
+        # ─────────────────────────────────────────────────────────────────────
+
         logger.info("Database tables initialized successfully")
 
 

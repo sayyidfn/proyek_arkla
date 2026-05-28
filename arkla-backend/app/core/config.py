@@ -1,6 +1,7 @@
 import os
 from pydantic_settings import BaseSettings
 from typing import Optional, List
+import secrets
 
 
 class Settings(BaseSettings):
@@ -33,6 +34,12 @@ class Settings(BaseSettings):
     # CORS - separate frontend URLs with comma
     cors_origins: str = "http://localhost:3000,http://localhost:5173,http://127.0.0.1:3000"
     
+    # Authentication / JWT
+    secret_key: str = "GANTI_INI_DI_PRODUCTION_WAJIB_MIN_32_KARAKTER_RANDOM"
+    algorithm: str = "HS256"
+    token_expire_hours: int = 8          # Durasi sesi normal
+    token_expire_days_remember: int = 7  # Durasi sesi "Ingat Saya"
+    
     # Rate Limiting
     rate_limit_requests: int = 60  # requests per minute
     rate_limit_window: int = 60  # window in seconds
@@ -40,9 +47,10 @@ class Settings(BaseSettings):
     @property
     def cors_origins_list(self) -> List[str]:
         """Parse CORS origins from comma-separated string."""
-        # For production, allow all origins (or configure specific ones via env)
-        # This ensures frontend can connect from any domain
-        return ["*"]
+        # Wildcard '*' tidak kompatibel dengan allow_credentials=True (CORS spec).
+        # Origin harus spesifik agar cookie-based auth berjalan.
+        origins = [o.strip() for o in self.cors_origins.split(",") if o.strip()]
+        return origins if origins else ["http://localhost:3000"]
     
     @property
     def is_production(self) -> bool:
