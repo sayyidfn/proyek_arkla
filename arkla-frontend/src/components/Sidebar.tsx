@@ -7,8 +7,36 @@ import { usePathname } from "next/navigation";
 import { useSidebar } from "@/lib/sidebar-context";
 import { useAuth } from "@/lib/auth-context";
 
+// Tipe menu item: mendukung icon path atau inline SVG component
+type MenuItem = {
+  name: string;
+  href: string;
+  icon?: string;
+  svgIcon?: React.ReactNode;
+};
+
+// Icon inline untuk Registrasi Staff (user-plus)
+const UserPlusIcon = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <line x1="19" y1="8" x2="19" y2="14" />
+    <line x1="22" y1="11" x2="16" y2="11" />
+  </svg>
+);
+
 // Menu items untuk sidebar
-const baseMenuItems = [
+const baseMenuItems: MenuItem[] = [
   { name: "Dashboard", href: "/", icon: "/icondashboard.svg" },
   { name: "Input Surat", href: "/upload", icon: "/iconinputsurat.svg" },
   { name: "Daftar Surat", href: "/archive", icon: "/icondaftarsurat.svg" },
@@ -27,13 +55,12 @@ const Sidebar: React.FC = () => {
   };
 
   // Dinamis menambahkan menu registrasi untuk admin
-  const menuItems = [...baseMenuItems];
+  const menuItems: MenuItem[] = [...baseMenuItems];
   if (user?.role === "admin") {
-    // Gunakan icon yang sudah ada atau icon user-plus sederhana
     menuItems.push({
       name: "Registrasi Staff",
       href: "/register",
-      icon: "/iconplus.svg", // Menggunakan icon yang tersedia
+      svgIcon: <UserPlusIcon />, // inline SVG, selalu terlihat
     });
   }
 
@@ -92,13 +119,24 @@ const Sidebar: React.FC = () => {
                       : "text-[#4A5565] hover:bg-gray-100 active:bg-gray-200"
                   }`}
                 >
-                  <Image
-                    src={item.icon}
-                    alt={item.name}
-                    width={20}
-                    height={20}
-                    className={`transition-all ${active ? "brightness-0 invert" : ""}`}
-                  />
+                  {/* Render inline SVG atau Image file */}
+                  {item.svgIcon ? (
+                    <span
+                      className={`flex-shrink-0 ${
+                        active ? "text-white" : "text-[#4A5565]"
+                      }`}
+                    >
+                      {item.svgIcon}
+                    </span>
+                  ) : item.icon ? (
+                    <Image
+                      src={item.icon}
+                      alt={item.name}
+                      width={20}
+                      height={20}
+                      className={`transition-all ${active ? "brightness-0 invert" : ""}`}
+                    />
+                  ) : null}
                   <span>{item.name}</span>
                   {active && (
                     <div className="ml-auto w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
