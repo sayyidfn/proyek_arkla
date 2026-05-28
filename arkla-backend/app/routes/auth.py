@@ -100,8 +100,8 @@ async def login(login_data: LoginRequest, response: Response):
         key="arkla_token",
         value=token,
         httponly=True,
-        samesite="strict",
-        secure=settings.is_production,
+        samesite="none",
+        secure=True,
         max_age=max_age,
     )
 
@@ -130,8 +130,8 @@ async def logout(response: Response, current_user: dict = Depends(get_current_us
     response.delete_cookie(
         key="arkla_token",
         httponly=True,
-        samesite="strict",
-        secure=settings.is_production,
+        samesite="none",
+        secure=True,
     )
     return LogoutResponse(
         status="success",
