@@ -1,4 +1,15 @@
+---
+title: ARKLA Backend API
+emoji: 📄
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # ARKLA - Sistem Arsip Kedinasan DPRD Sleman
+
 
 [![Backend](https://img.shields.io/badge/Backend-FastAPI-009688?style=flat-square&logo=fastapi)](https://sayyidfn-arkla-backend.hf.space/docs)
 [![Frontend](https://img.shields.io/badge/Frontend-Next.js-000000?style=flat-square&logo=next.js)](https://proyekarkla.vercel.app)
