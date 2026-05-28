@@ -3,7 +3,7 @@ import logging
 from datetime import datetime
 from typing import Optional
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Depends
 from fastapi.responses import JSONResponse, FileResponse
 
 import pandas as pd
@@ -11,6 +11,7 @@ import pandas as pd
 from app.core.database import get_db
 from app.core.constants import KategoriSurat, ErrorCode
 from app.core.utils import format_error_response
+from app.core.auth import get_current_user
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -129,7 +130,8 @@ async def export_surat(
     kategori: str = Query(..., description="Kategori surat (required)"),
     date_from: Optional[str] = Query(None, description="Start date (YYYY-MM-DD)"),
     date_to: Optional[str] = Query(None, description="End date (YYYY-MM-DD)"),
-    format: str = Query("xlsx", description="Export format: xlsx or csv")
+    format: str = Query("xlsx", description="Export format: xlsx or csv"),
+    current_user: dict = Depends(get_current_user) # PROTECTED
 ):
     # Validate kategori
     if kategori not in [k.value for k in KategoriSurat]:
@@ -263,7 +265,10 @@ async def export_surat(
 
 
 @router.get("/download/{filename}")
-async def download_file(filename: str):
+async def download_file(
+    filename: str,
+    current_user: dict = Depends(get_current_user) # PROTECTED
+):
     filepath = os.path.join("output", filename)
     
     if not os.path.exists(filepath):

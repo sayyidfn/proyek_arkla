@@ -174,3 +174,49 @@ export interface VerifyResponse {
   nomor_urut_display: string;
   message: string;
 }
+
+// ==================== AUTHENTICATION ====================
+export interface AuthUser {
+  id: string;
+  username: string;
+  nama: string;
+  role: "admin" | "operator";
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface LoginRequest {
+  username: string;
+  password: string;
+  remember_me?: boolean;
+}
+
+export interface LoginResponse {
+  status: "success" | "error";
+  message: string;
+  user: AuthUser;
+}
+
+export interface RegisterRequest {
+  username: string;
+  nama: string;
+  password?: string;
+  confirm_password?: string;
+  role: "admin" | "operator";
+}
+
+export interface RegisterResponse {
+  status: "success" | "error";
+  message: string;
+  user: AuthUser;
+}
+
+export interface LogoutResponse {
+  status: "success" | "error";
+  message: string;
+}
+
+export interface MeResponse {
+  status: "success" | "error";
+  user: AuthUser;
+}

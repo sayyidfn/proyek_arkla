@@ -7,6 +7,13 @@ import {
   VerifyResponse,
   KategoriSurat,
   DashboardStats,
+  AuthUser,
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
+  RegisterResponse,
+  LogoutResponse,
+  MeResponse,
 } from "./types";
 import { API_BASE_URL } from "./config";
 
@@ -25,6 +32,7 @@ class APIClient {
 
     try {
       const response = await fetch(url, {
+        credentials: "include", // Tambahan penting untuk cookie HttpOnly
         ...options,
         headers: {
           "Content-Type": "application/json",
@@ -32,10 +40,34 @@ class APIClient {
         },
       });
 
+      if (response.status === 401) {
+        // Abaikan redirect 401 jika user sedang mengakses endpoint login/me
+        const isAuthEndpoint = endpoint.includes("/auth/login") || endpoint.includes("/auth/me");
+        if (!isAuthEndpoint && typeof window !== "undefined") {
+          window.location.href = "/login?reason=session_expired";
+        }
+        
+        // Ekstrak pesan dari backend jika ada
+        const errorJson = await response.json().catch(() => ({}));
+        const detail = errorJson.detail;
+        const msg = (detail && typeof detail === "object") ? detail.message : (detail || "Sesi berakhir. Silakan login kembali.");
+        throw new Error(msg);
+      }
+
       if (!response.ok) {
         const error = await response.json().catch(() => ({}));
-        const errorMessage =
-          error.message || error.detail || `API Error: ${response.status}`;
+        let errorMessage = "Terjadi kesalahan.";
+        if (error.detail) {
+          if (typeof error.detail === "object" && error.detail.message) {
+            errorMessage = error.detail.message;
+          } else {
+            errorMessage = String(error.detail);
+          }
+        } else if (error.message) {
+          errorMessage = error.message;
+        } else {
+          errorMessage = `API Error: ${response.status}`;
+        }
         throw new Error(errorMessage);
       }
 
@@ -132,6 +164,7 @@ class APIClient {
       const response = await fetch(`${this.baseUrl}/process-surat`, {
         method: "POST",
         body: formData,
+        credentials: "include",
         signal: controller.signal,
       });
 
@@ -308,11 +341,54 @@ class APIClient {
   async getDisposisiPreview(suratId: string): Promise<string> {
     const response = await fetch(
       `${this.baseUrl}/preview-disposisi/${suratId}`,
+      {
+        credentials: "include",
+      }
     );
     if (!response.ok) {
       throw new Error(`Failed to get disposisi preview: ${response.status}`);
     }
     return response.text();
+  }
+
+  // ==================== AUTHENTICATION ====================
+
+  /**
+   * Login user
+   */
+  async login(data: LoginRequest): Promise<LoginResponse> {
+    return this.request<LoginResponse>("/auth/login", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  /**
+   * Logout user
+   */
+  async logout(): Promise<LogoutResponse> {
+    return this.request<LogoutResponse>("/auth/logout", {
+      method: "POST",
+    });
+  }
+
+  /**
+   * Get current authenticated user details
+   */
+  async getMe(): Promise<MeResponse> {
+    return this.request<MeResponse>("/auth/me", {
+      method: "GET",
+    });
+  }
+
+  /**
+   * Register new user (operator/admin, Admin only)
+   */
+  async register(data: RegisterRequest): Promise<RegisterResponse> {
+    return this.request<RegisterResponse>("/auth/register", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
   }
 }
 

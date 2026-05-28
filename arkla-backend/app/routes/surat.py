@@ -2,12 +2,13 @@ import logging
 from typing import Optional
 from datetime import datetime
 
-from fastapi import APIRouter, HTTPException, Query, Path
+from fastapi import APIRouter, HTTPException, Query, Path, Depends
 from fastapi.responses import JSONResponse
 
 from app.core.database import get_db
 from app.core.constants import KategoriSurat, CATEGORY_SCHEMAS, ErrorCode
 from app.core.utils import format_error_response, get_timestamp
+from app.core.auth import get_current_user
 from app.models.schemas import VerifyRequest, VerifyResponse
 
 router = APIRouter()
@@ -15,7 +16,10 @@ logger = logging.getLogger(__name__)
 
 
 @router.post("/verify")
-async def verify_surat(request: VerifyRequest):
+async def verify_surat(
+    request: VerifyRequest,
+    current_user: dict = Depends(get_current_user) # PROTECTED
+):
     surat_id = request.surat_id
     extracted_data = request.extracted_data
     kode_arsip = request.kode_arsip
@@ -139,7 +143,8 @@ async def list_surat(
     search: Optional[str] = Query(None, description="Search in isi_ringkas"),
     include_unverified: bool = Query(False, description="Include unverified surat"),
     page: int = Query(1, ge=1, description="Page number"),
-    limit: int = Query(20, ge=1, le=100, description="Items per page")
+    limit: int = Query(20, ge=1, le=100, description="Items per page"),
+    current_user: dict = Depends(get_current_user) # PROTECTED
 ):
     try:
         with get_db() as conn:
@@ -232,7 +237,10 @@ async def list_surat(
 
 
 @router.get("/surat/{surat_id}")
-async def get_surat(surat_id: str = Path(..., description="Surat ID")):
+async def get_surat(
+    surat_id: str = Path(..., description="Surat ID"),
+    current_user: dict = Depends(get_current_user) # PROTECTED
+):
     try:
         with get_db() as conn:
             cursor = conn.cursor()
@@ -289,7 +297,10 @@ async def get_surat(surat_id: str = Path(..., description="Surat ID")):
 
 
 @router.get("/preview-disposisi/{surat_id}")
-async def preview_disposisi(surat_id: str = Path(..., description="Surat ID")):
+async def preview_disposisi(
+    surat_id: str = Path(..., description="Surat ID"),
+    current_user: dict = Depends(get_current_user) # PROTECTED
+):
     try:
         with get_db() as conn:
             cursor = conn.cursor()
@@ -457,7 +468,10 @@ def generate_disposisi_html(surat: dict, details: dict) -> str:
 
 
 @router.delete("/surat/{surat_id}")
-async def delete_surat(surat_id: str = Path(..., description="ID surat yang akan dihapus")):
+async def delete_surat(
+    surat_id: str = Path(..., description="ID surat yang akan dihapus"),
+    current_user: dict = Depends(get_current_user) # PROTECTED
+):
     """Delete a surat and its related data from category tables"""
     logger.info(f"Deleting surat", extra={"surat_id": surat_id})
     

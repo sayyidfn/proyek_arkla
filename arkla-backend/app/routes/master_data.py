@@ -2,7 +2,7 @@ import os
 import logging
 from datetime import datetime
 
-from fastapi import APIRouter, File, UploadFile, Query
+from fastapi import APIRouter, File, UploadFile, Query, Depends
 from fastapi.responses import JSONResponse
 
 import pandas as pd
@@ -10,6 +10,7 @@ import pandas as pd
 from app.core.database import get_db
 from app.core.constants import ErrorCode
 from app.core.utils import format_error_response, get_timestamp
+from app.core.auth import get_current_user
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -18,7 +19,8 @@ logger = logging.getLogger(__name__)
 @router.post("/import-master-data")
 async def import_master_data(
     file: UploadFile = File(...),
-    action: str = Query("replace", description="Action: 'replace' or 'append'")
+    action: str = Query("replace", description="Action: 'replace' or 'append'"),
+    current_user: dict = Depends(get_current_user) # PROTECTED
 ):
     if action not in ["replace", "append"]:
         return JSONResponse(
@@ -139,7 +141,8 @@ async def import_master_data(
 async def list_kode_klasifikasi(
     search: str = Query(None, description="Search in kode or keterangan"),
     page: int = Query(1, ge=1),
-    limit: int = Query(50, ge=1, le=500)
+    limit: int = Query(50, ge=1, le=500),
+    current_user: dict = Depends(get_current_user) # PROTECTED
 ):
     try:
         with get_db() as conn:

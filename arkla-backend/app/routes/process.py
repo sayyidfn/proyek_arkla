@@ -3,7 +3,7 @@ import time
 import logging
 from typing import Optional
 
-from fastapi import APIRouter, File, UploadFile, Form, HTTPException
+from fastapi import APIRouter, File, UploadFile, Form, HTTPException, Depends
 from fastapi.responses import JSONResponse
 
 from app.core.constants import (
@@ -18,6 +18,7 @@ from app.core.utils import (
 )
 from app.core.database import get_db
 from app.core.config import settings
+from app.core.auth import get_current_user
 from app.services.image_preprocessor import image_preprocessor
 from app.services.gemini_engine import gemini_engine
 from app.services.text_summarizer import text_summarizer
@@ -37,7 +38,8 @@ async def process_surat(
     file: UploadFile = File(...),
     category_id: str = Form(...),
     use_optimized: bool = Form(default=True),
-    skip_preprocessing: bool = Form(default=False)  # Skip heavy preprocessing for faster processing
+    skip_preprocessing: bool = Form(default=False), # Skip heavy preprocessing for faster processing
+    current_user: dict = Depends(get_current_user) # PROTECTED
 ):
     start_time = time.time()
     surat_id = generate_surat_id()

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SidebarProvider } from "@/lib/sidebar-context";
+import { AuthProvider } from "@/lib/auth-context";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,7 +37,9 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body className={`${inter.variable} font-sans antialiased`}>
-        <SidebarProvider>{children}</SidebarProvider>
+        <AuthProvider>
+          <SidebarProvider>{children}</SidebarProvider>
+        </AuthProvider>
       </body>
     </html>
   );
