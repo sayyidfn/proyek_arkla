@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { apiClient } from "@/lib/api-client";
 import { SuratListItem, KategoriSurat } from "@/lib/types";
 
@@ -95,12 +96,12 @@ export default function RecentArchives() {
           <h2 className="text-base sm:text-lg font-semibold text-gray-900">
             Arsip Terbaru
           </h2>
-          <a
+          <Link
             href="/archive"
             className="text-xs sm:text-sm text-[#2C5F6F] hover:underline font-medium"
           >
             Lihat Semua
-          </a>
+          </Link>
         </div>
       </div>
 

@@ -14,15 +14,17 @@ const Navbar: React.FC<NavbarProps> = ({ title, subtitle }) => {
   const { toggle } = useSidebar();
   const [today, setToday] = useState<string>("");
 
-  // Format tanggal hari ini - only on client side to avoid hydration mismatch
   useEffect(() => {
-    setToday(
-      new Date().toLocaleDateString("id-ID", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      }),
-    );
+    const timer = setTimeout(() => {
+      setToday(
+        new Date().toLocaleDateString("id-ID", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }),
+      );
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
