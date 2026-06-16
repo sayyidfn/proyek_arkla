@@ -1,507 +1,209 @@
----
-title: ARKLA Backend API
-emoji: 📄
-colorFrom: blue
-colorTo: green
-sdk: docker
-app_port: 7860
-pinned: false
----
-
 # ARKLA - Sistem Arsip Kedinasan DPRD Sleman
 
-
 [![Backend](https://img.shields.io/badge/Backend-FastAPI-009688?style=flat-square&logo=fastapi)](https://sayyidfn-arkla-backend.hf.space/docs)
-[![Frontend](https://img.shields.io/badge/Frontend-Next.js-000000?style=flat-square&logo=next.js)](https://proyekarkla.vercel.app)
-[![AI](https://img.shields.io/badge/AI-Google%20Gemini-4285F4?style=flat-square&logo=google)](https://ai.google.dev/)
+[![Frontend](https://img.shields.io/badge/Frontend-Next.js%2016-000000?style=flat-square&logo=next.js)](https://proyekarkla.vercel.app)
+[![AI](https://img.shields.io/badge/AI-Google%20Gemini%202.5-4285F4?style=flat-square&logo=google)](https://ai.google.dev/)
+[![Docker](https://img.shields.io/badge/Deployment-Docker%20%26%20HF%20Spaces-2496ED?style=flat-square&logo=docker)](https://huggingface.co/spaces)
 
-> Sistem manajemen arsip digital dengan OCR dan AI extraction menggunakan Google Gemini API
+ARKLA adalah sistem manajemen arsip surat dinas digital terintegrasi yang dirancang khusus untuk DPRD Kabupaten Sleman. Sistem ini menggunakan teknologi **OCR (Optical Character Recognition)** dan **AI Extraction** berbasis **Google Gemini API** untuk membaca, mengekstraksi, dan mengkategorikan isi surat secara otomatis guna mengurangi beban kerja input manual dan meningkatkan efisiensi administrasi.
+
+---
 
 ## ⚡ Live Demo
 
-- **Frontend**: [proyekarkla.vercel.app](https://proyekarkla.vercel.app)
-- **Backend API**: [sayyidfn-arkla-backend.hf.space](https://sayyidfn-arkla-backend.hf.space/docs)
+- **Frontend App**: [proyekarkla.vercel.app](https://proyekarkla.vercel.app)
+- **Backend API Documentation**: [sayyidfn-arkla-backend.hf.space/docs](https://sayyidfn-arkla-backend.hf.space/docs)
+
+---
 
 ## 🎯 Fitur Utama
 
-| Fitur                      | Deskripsi                                                            |
-| -------------------------- | -------------------------------------------------------------------- |
-| 📄 **OCR & AI Extraction** | Upload PDF/JPG/PNG, ekstrak data otomatis dengan Gemini AI           |
-| 📁 **6 Kategori Surat**    | Masuk Biasa, Undangan, Masuk Penting, Keluar, Keluar Sekwan, Rahasia |
-| 🔍 **Pencarian & Filter**  | Cari berdasarkan kategori, tanggal, kode arsip, atau isi ringkas     |
-| 📊 **Dashboard Statistik** | Monitor total arsip, pending review, tingkat akurasi AI              |
-| 📥 **Export Data**         | Export ke Excel/CSV dengan format standar DPRD                       |
-| 🖨️ **Lembar Disposisi**    | Generate dan cetak lembar disposisi format A5                        |
+| Fitur | Deskripsi |
+| --- | --- |
+| 📄 **OCR & AI Extraction** | Unggah dokumen (PDF, JPG, PNG) untuk diekstrak isi dan metadata suratnya secara otomatis menggunakan Gemini AI. |
+| 📁 **6 Kategori Surat** | Klasifikasi surat ke dalam kategori spesifik: *Masuk Biasa, Undangan, Masuk Penting, Keluar, Keluar Sekwan,* dan *Rahasia*. |
+| 🔍 **Pencarian & Filter** | Pencarian cepat berbasis teks, rentang tanggal, kode klasifikasi arsip, atau kategori surat. |
+| 📊 **Dashboard Statistik** | Monitor jumlah arsip masuk/keluar, status tinjauan manual, dan kalkulasi estimasi penggunaan API. |
+| 📥 **Ekspor Laporan** | Mengunduh rekapitulasi data arsip dalam format Excel (.xlsx) atau CSV sesuai standar format DPRD. |
+| 🖨️ **Cetak Lembar Disposisi** | Menghasilkan berkas cetak lembar disposisi dinamis dengan format standar A5. |
+| 🔒 **Security & Audit Logs** | Keamanan data sensitif dengan sistem autentikasi JWT, validasi file, CORS, dan log audit khusus untuk kategori *Rahasia*. |
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js 18+ (untuk frontend)
-- Python 3.12+ (untuk backend)
-- Google Gemini API Key
-
-### 1. Clone Repository
-
-```bash
-git clone https://github.com/sayyidfn/proyek_arkla.git
-cd proyek_arkla
-```
-
-### 2. Setup Backend
-
-```bash
-cd arkla-backend
-python -m venv venv
-venv\Scripts\activate  # Windows
-# atau
-source venv/bin/activate  # Linux/Mac
-
-pip install -r requirements.txt
-```
-
-### 3. Environment Variables
-
-Buat file `.env` di folder `arkla-backend/`:
-
-```env
-GOOGLE_API_KEY=your_gemini_api_key_here
-GEMINI_MODEL=gemini-2.5-flash
-DEBUG=true
-ENVIRONMENT=development
-```
-
-### 4. Jalankan Backend
-
-```bash
-python run.py
-# Server berjalan di http://localhost:8000
-```
-
-### 5. Setup Frontend
-
-```bash
-cd ../arkla-frontend
-npm install
-npm run dev
-# Frontend berjalan di http://localhost:3000
-```
+---
 
 ## 🛠️ Tech Stack
 
-**Backend:**
+### Backend
+- **Core Framework**: FastAPI (Python 3.12+)
+- **Database**: SQLite (SQLAlchemy / direct sqlite3 connection)
+- **AI Integration**: Google Gemini API (`gemini-2.5-flash` untuk pemrosesan teks cepat & efisien)
+- **Image Preprocessing**: OpenCV & Pillow (untuk optimalisasi kontras gambar sebelum OCR)
+- **Deployment**: Docker & Hugging Face Spaces
 
-- FastAPI (Python 3.12)
-- SQLite Database
-- Google Gemini API
-- OpenCV & Pillow
+### Frontend
+- **Framework**: Next.js 16.1.x (App Router & TypeScript 5)
+- **Library**: React 19.2.x
+- **Styling**: Tailwind CSS v4.x (dengan `@tailwindcss/postcss`)
+- **Authentication**: JWT & Cookie-based sessions (jose)
+- **Deployment**: Vercel
 
-**Frontend:**
+---
 
-- Next.js 15 + TypeScript
-- Tailwind CSS
-- React 19
+## 📁 Struktur Repositori
 
-**Deployment:**
-
-- Backend: Hugging Face Spaces
-- Frontend: Vercel
-
-## 📁 Struktur Proyek
-
-```
-arkla-backend/
-├── app/
-│   ├── core/          # Configuration & database
-│   ├── models/        # Pydantic schemas
-│   ├── routes/        # API endpoints
-│   ├── services/      # Business logic
-│   └── main.py        # FastAPI app
-├── database/          # SQLite files
-├── uploads/           # Uploaded files
-└── requirements.txt
-
-arkla-frontend/
-├── src/
-│   ├── app/          # Next.js App Router
-│   ├── components/   # React components
-│   └── lib/          # Utilities & types
-├── public/           # Static assets
-└── package.json
-```
-
-## 🔧 Konfigurasi
-
-### Environment Variables
-
-**Backend (`.env`):**
-
-```env
-# Google Gemini
-GOOGLE_API_KEY=your_api_key
-GEMINI_MODEL=gemini-2.5-flash
-
-# Server
-HOST=0.0.0.0
-PORT=8000
-DEBUG=true
-ENVIRONMENT=development
-
-# Database
-DATABASE_PATH=database/arkla.db
-
-# CORS (pisah dengan koma)
-CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+```text
+proyek_arkla/
+├── arkla-backend/          # Backend Service (FastAPI)
+│   ├── app/
+│   │   ├── core/           # Konfigurasi, Database, Utilitas, & Auth
+│   │   ├── models/         # Pydantic schemas untuk validasi request/response
+│   │   ├── routes/         # Router API (Auth, Process OCR, Surat CRUD, Export, Master)
+│   │   ├── services/       # Logika bisnis AI (Gemini, OCR, Auto-fill, Matcher)
+│   │   └── main.py         # Entrypoint aplikasi FastAPI
+│   ├── database/           # Penyimpanan berkas SQLite (.db)
+│   ├── uploads/            # Direktori sementara penyimpanan file unggahan
+│   ├── requirements.txt    # Daftar dependensi Python
+│   └── run.py              # Script untuk menjalankan backend lokal
+│
+├── arkla-frontend/         # Frontend Service (Next.js)
+│   ├── src/
+│   │   ├── app/            # Halaman utama & layout Next.js (App Router)
+│   │   ├── components/     # Komponen React (Shared, Archive, Upload, Export)
+│   │   ├── hooks/          # React hooks kustom (useArchive, useUpload, dll.)
+│   │   └── lib/            # HTTP client API & TypeScript types
+│   ├── public/             # Aset statis (ikon, gambar)
+│   └── package.json        # Dependensi dan script NPM
+│
+├── Dockerfile              # Konfigurasi Docker multi-stage untuk Hugging Face Spaces
+├── .dockerignore           # Daftar file yang dikecualikan dari Docker build
+└── README.md               # Dokumentasi utama proyek (file ini)
 ```
 
-**Frontend (`.env.local`):**
+---
 
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
-```
+## 🚀 Quick Start & Setup Lokal
 
-## 📚 API Endpoints
+### Prasyarat System
+- Python 3.12 atau lebih baru
+- Node.js 18 atau lebih baru (NPM v9+)
+- Akun Google AI Studio untuk mendapatkan **Gemini API Key**
 
-**Core Endpoints:**
+---
 
-- `POST /api/v1/process-surat` - Upload & proses dokumen
-- `POST /api/v1/verify` - Verifikasi & simpan data
-- `GET /api/v1/surat` - List semua surat
-- `GET /api/v1/surat/{id}` - Detail surat
-- `POST /api/v1/export` - Export data ke Excel/CSV
+### 1. Setup Backend (FastAPI)
 
-**Dokumentasi lengkap:** [Backend API Docs](https://sayyidfn-arkla-backend.hf.space/docs)
+1. Masuk ke direktori backend:
+   ```bash
+   cd arkla-backend
+   ```
 
-## 🔄 Development Workflow
+2. Buat dan aktifkan virtual environment Python:
+   ```bash
+   # Windows (PowerShell/CMD)
+   python -m venv venv
+   .\venv\Scripts\activate
 
-### 1. Menambah Fitur Baru
+   # Linux / macOS
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
+3. Instal semua dependensi Python:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Konfigurasi file `.env`:
+   Salin berkas `.env.example` menjadi `.env` dan masukkan konfigurasi Anda:
+   ```bash
+   cp .env.example .env
+   ```
+   Pastikan minimal mengisi parameter berikut:
+   ```env
+   GOOGLE_API_KEY=isi_dengan_api_key_gemini_anda
+   GEMINI_MODEL=gemini-2.5-flash
+   ENVIRONMENT=development
+   SECRET_KEY=masukkan_32_karakter_acak_untuk_jwt_secret
+   JWT_SECRET=masukkan_32_karakter_acak_untuk_jwt_secret
+   ```
+
+5. Jalankan server backend lokal:
+   ```bash
+   python run.py
+   ```
+   Server backend akan aktif di `http://localhost:8000`. Anda dapat mengakses dokumentasi API interaktif di `http://localhost:8000/docs`.
+
+---
+
+### 2. Setup Frontend (Next.js)
+
+1. Buka terminal baru dan masuk ke direktori frontend:
+   ```bash
+   cd arkla-frontend
+   ```
+
+2. Instal dependensi Node.js:
+   ```bash
+   npm install
+   ```
+
+3. Konfigurasi file `.env.local`:
+   Buat file `.env.local` di dalam direktori `arkla-frontend/` dan isi dengan:
+   ```env
+   NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+   JWT_SECRET=samakan_dengan_jwt_secret_di_backend_env
+   ```
+
+4. Jalankan server development frontend:
+   ```bash
+   npm run dev
+   ```
+   Aplikasi frontend akan aktif dan dapat diakses di `http://localhost:3000`.
+
+---
+
+
+
+## 📚 API Endpoint Utama
+
+| Method | Endpoint | Deskripsi | Autentikasi |
+| :---: | :--- | :--- | :---: |
+| **POST** | `/api/v1/auth/login` | Autentikasi pengguna & pembuatan session cookie | Tidak |
+| **POST** | `/api/v1/process-surat` | Unggah berkas dokumen (PDF/JPG/PNG) & ekstraksi AI | Ya |
+| **POST** | `/api/v1/verify` | Menyimpan & memverifikasi hasil ekstraksi data surat | Ya |
+| **GET** | `/api/v1/surat` | Mengambil daftar surat terarsipkan dengan pagination & filter | Ya |
+| **GET** | `/api/v1/surat/{id}` | Mengambil detail lengkap informasi satu surat | Ya |
+| **POST** | `/api/v1/export` | Ekspor rekapitulasi data arsip surat ke format Excel/CSV | Ya |
+| **GET** | `/api/v1/preview-disposisi/{id}` | Menghasilkan format HTML pratinjau lembar disposisi | Ya |
+| **DELETE** | `/api/v1/surat/{id}` | Menghapus arsip surat beserta data kategorinya | Ya |
+| **GET** | `/api/v1/health` | Status kesehatan konektivitas database & integrasi Gemini | Tidak |
+
+---
+
+## 🐳 Panduan Deployment
+
+### Backend (Hugging Face Spaces)
+Repositori ini telah dilengkapi dengan `Dockerfile` di root untuk melakukan deployment backend FastAPI secara langsung ke Hugging Face Spaces berbasis Docker:
 ```bash
-# Buat branch baru
-git checkout -b feature/nama-fitur
+# Build image Docker lokal
+docker build -t arkla-backend .
 
-# Development
-# ... kode ...
-
-# Test & commit
-git add .
-git commit -m "feat: tambah fitur baru"
-git push origin feature/nama-fitur
+# Menjalankan container dengan port forwarding
+docker run -d -p 7860:7860 -e GOOGLE_API_KEY=api_key_anda arkla-backend
 ```
 
-### 2. Deployment
+### Frontend (Vercel)
+Layanan frontend dapat di-deploy dengan mudah ke Vercel dengan menyambungkan repositori GitHub Anda ke dashboard Vercel, mengatur root directory ke `arkla-frontend`, serta memasukkan *Environment Variables* berikut:
+- `NEXT_PUBLIC_API_URL` (Mengarah ke domain backend Hugging Face Spaces Anda, contoh: `https://sayyidfn-arkla-backend.hf.space/api/v1`)
+- `JWT_SECRET` (JWT Token Signature yang sama dengan backend)
 
-**Backend ke Hugging Face Spaces:**
+---
 
-- Push ke GitHub (auto-deploy)
-
-**Frontend ke Vercel:**
-
-- Push ke GitHub (auto-deploy)
-
-## 🐛 Troubleshooting
-
-### Backend Issues
-
-**"GOOGLE_API_KEY not configured"**
-
-```bash
-# Set environment variable
-export GOOGLE_API_KEY="your_api_key"
-# atau tambah di file .env
-```
-
-**"Module not found"**
-
-```bash
-# Install dependencies
-pip install -r requirements.txt
-```
-
-**Database error**
-
-```bash
-# Reset database
-rm database/arkla.db
-python -c "from app.core.database import init_database; init_database()"
-```
-
-### Frontend Issues
-
-**API connection error**
-
-- Cek backend berjalan di port 8000
-- Cek `NEXT_PUBLIC_API_URL` di `.env.local`
-
-**Build error**
-
-```bash
-# Clean install
-rm -rf node_modules package-lock.json
-npm install
-```
-
-## 📄 License
-
-MIT License - lihat [LICENSE](LICENSE) untuk detail.
-
-## 👥 Contributors
+## 🤝 Kontributor
 
 - **Sayyid Faisal Naufal** - [sayyidfn](https://github.com/sayyidfn)
 
 ---
 
-**💡 Tips:**
-
-- Gunakan gambar berkualitas tinggi untuk OCR lebih akurat
-- Kategorikan surat dengan benar untuk data yang terstruktur
-- Lakukan verifikasi manual untuk data penting
-- Export data secara berkala sebagai backup
-
-**📞 Support:**
-Jika ada masalah atau pertanyaan, buat [issue di GitHub](https://github.com/sayyidfn/proyek_arkla/issues).
-│ │ ├── routes/ # API endpoints
-│ │ └── services/ # Business logic (Gemini, OCR)
-│ ├── database/ # SQLite database
-│ ├── uploads/ # Uploaded files
-│ └── requirements.txt
-│
-├── arkla-frontend/ # Next.js Frontend
-│ ├── src/
-│ │ ├── app/ # Pages (App Router)
-│ │ ├── components/ # React components
-│ │ └── lib/ # API client, types, utils
-│ └── package.json
-│
-├── Dockerfile # Production Docker config
-├── .dockerignore
-└── README.md
-
-````
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Python 3.12+
-- Node.js 18+
-- Google Gemini API Key
-
-### 1. Clone Repository
-
-```bash
-git clone https://github.com/sayyidfn/proyek_arkla.git
-cd proyek_arkla
-````
-
-### 2. Setup Backend
-
-```bash
-cd arkla-backend
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# atau
-.\venv\Scripts\Activate   # Windows
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Create .env file
-cp .env.example .env
-# Edit .env dan tambahkan GOOGLE_API_KEY
-
-# Run server
-python run.py
-```
-
-Backend akan berjalan di `http://localhost:8000`
-
-### 3. Setup Frontend
-
-```bash
-cd arkla-frontend
-
-# Install dependencies
-npm install
-
-# Create .env.local
-echo "NEXT_PUBLIC_API_URL=http://localhost:8000" > .env.local
-
-# Run development server
-npm run dev
-```
-
-Frontend akan berjalan di `http://localhost:3000`
-
-## ⚙️ Environment Variables
-
-### Backend (.env)
-
-```env
-# Required
-GOOGLE_API_KEY=your_gemini_api_key_here
-
-# Optional
-ENVIRONMENT=development
-DATABASE_PATH=database/arkla.db
-```
-
-### Frontend (.env.local)
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000
-```
-
-## 📚 API Documentation
-
-API documentation tersedia di:
-
-- **Swagger UI**: `http://localhost:8000/docs`
-- **ReDoc**: `http://localhost:8000/redoc`
-
-### Main Endpoints
-
-| Method   | Endpoint                | Description                  |
-| -------- | ----------------------- | ---------------------------- |
-| `POST`   | `/api/v1/process-surat` | Upload & process document    |
-| `POST`   | `/api/v1/verify`        | Verify & save extracted data |
-| `GET`    | `/api/v1/surat`         | List all surat with filters  |
-| `GET`    | `/api/v1/surat/{id}`    | Get surat detail             |
-| `DELETE` | `/api/v1/surat/{id}`    | Delete surat                 |
-| `POST`   | `/api/v1/export`        | Export to Excel/CSV          |
-| `GET`    | `/health`               | Health check                 |
-
-### Process Surat Request
-
-```bash
-curl -X POST "http://localhost:8000/api/v1/process-surat" \
-  -F "file=@document.jpg" \
-  -F "category_id=masuk_biasa" \
-  -F "use_optimized=true"
-```
-
-### Response Example
-
-```json
-{
-  "status": "success",
-  "surat_id": "abc-123-def",
-  "extracted_data": {
-    "nomor_surat": "001/DPRD/2026",
-    "tgl_surat": "2026-02-01",
-    "asal_surat": "Pemerintah Kabupaten Sleman",
-    "isi_ringkas": "Undangan rapat koordinasi..."
-  },
-  "confidence": {
-    "overall": 0.85,
-    "fields": {
-      "nomor_surat": 0.95,
-      "tgl_surat": 0.9
-    }
-  }
-}
-```
-
-## 🐳 Docker Deployment
-
-### Build Image
-
-```bash
-docker build -t arkla-backend .
-```
-
-### Run Container
-
-```bash
-docker run -d \
-  -p 8000:8000 \
-  -e GOOGLE_API_KEY=your_key \
-  -e ENVIRONMENT=production \
-  arkla-backend
-```
-
-## ☁️ Cloud Deployment
-
-### Backend (Koyeb)
-
-1. Fork/push repository ke GitHub
-2. Buat project di [Koyeb](https://koyeb.com)
-3. Connect GitHub repository
-4. Set environment variable: `GOOGLE_API_KEY`
-5. Deploy!
-
-### Frontend (Vercel)
-
-1. Import project dari GitHub di [Vercel](https://vercel.com)
-2. Set `Root Directory` ke `arkla-frontend`
-3. Add environment variable: `NEXT_PUBLIC_API_URL` = URL backend Koyeb
-4. Deploy!
-
-## 📊 Kategori Surat
-
-| Kategori        | Deskripsi                | Fields Utama                                  |
-| --------------- | ------------------------ | --------------------------------------------- |
-| `masuk_biasa`   | Surat masuk biasa        | nomor_surat, asal_surat, tgl_surat, disposisi |
-| `undangan`      | Undangan rapat/acara     | tgl_acara, tempat, diperuntukan               |
-| `masuk_penting` | Surat masuk prioritas    | disposisi_ketua, tgl_diteruskan               |
-| `keluar`        | Surat keluar Dewan       | kepada, pengolah                              |
-| `keluar_sekwan` | Surat keluar Sekretariat | kepada, pengolah                              |
-| `rahasia`       | Surat rahasia            | audit_log enabled                             |
-
-## 🔒 Security
-
-- CORS configured for production domains
-- Input validation & sanitization
-- File type & size validation
-- SQL injection prevention (parameterized queries)
-- Audit logging for sensitive documents
-
-## 🧪 Testing
-
-```bash
-# Backend tests
-cd arkla-backend
-pytest
-
-# Frontend tests
-cd arkla-frontend
-npm test
-```
-
-## 📈 Performance Optimizations
-
-- **Image Preprocessing**: Auto-resize & optimize before OCR
-- **Database Indexing**: Indexes on frequently queried columns
-- **Response Caching**: OCR cache to avoid re-processing
-- **Lazy Loading**: Frontend components loaded on demand
-- **Docker Layer Caching**: Optimized Dockerfile for faster builds
-
-## 🤝 Contributing
-
-1. Fork repository
-2. Create feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open Pull Request
-
-## 📝 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## 👥 Authors
-
-- **Sayyid Fakhri** - _Initial work_ - [sayyidfn](https://github.com/sayyidfn)
-
-## 🙏 Acknowledgments
-
-- DPRD Kabupaten Sleman
-- Google Gemini AI Team
-- FastAPI & Next.js Communities
-
----
-
 <p align="center">
-  Made with ❤️ for DPRD Kabupaten Sleman
+  Dibuat dengan ❤️ untuk DPRD Kabupaten Sleman
 </p>
