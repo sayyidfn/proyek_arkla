@@ -197,13 +197,3 @@ Layanan frontend dapat di-deploy dengan mudah ke Vercel dengan menyambungkan rep
 - `JWT_SECRET` (JWT Token Signature yang sama dengan backend)
 
 ---
-
-## 🤝 Kontributor
-
-- **Sayyid Faisal Naufal** - [sayyidfn](https://github.com/sayyidfn)
-
----
-
-<p align="center">
-  Dibuat dengan ❤️ untuk DPRD Kabupaten Sleman
-</p>
